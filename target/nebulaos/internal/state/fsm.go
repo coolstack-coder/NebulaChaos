@@ -27,6 +27,7 @@ const (
 	OpRecordEvent   Op = "record_event"
 	OpKVPut         Op = "kv_put"
 	OpKVCAS         Op = "kv_cas"
+	OpReadBarrier   Op = "read_barrier"
 )
 
 // Command is the unit replicated through Raft. Everything the state machine
@@ -111,6 +112,9 @@ type FSM struct {
 	s  *Snapshot
 	// onApply, if set, is called after every command with the applied index.
 	onApply func(index uint64, c *Command)
+
+	bmu      sync.Mutex
+	barriers map[string]chan struct{}
 }
 
 func NewFSM() *FSM { return &FSM{s: emptySnapshot()} }
@@ -128,6 +132,9 @@ func (f *FSM) Apply(index uint64, data []byte) any {
 	err := f.apply(&c)
 	f.s.Applied = index
 	f.mu.Unlock()
+	if c.Op == OpReadBarrier {
+		f.releaseBarrier(c.Key)
+	}
 	if f.onApply != nil {
 		f.onApply(index, &c)
 	}
@@ -205,6 +212,8 @@ func (f *FSM) apply(c *Command) error {
 	switch c.Op {
 	case OpKVPut, OpKVCAS:
 		return s.applyKV(c)
+	case OpReadBarrier:
+		return nil
 	case OpRegisterNode:
 		if c.Node == nil || c.Node.ID == "" {
 			return errors.New("register_node: missing node")

@@ -130,12 +130,19 @@ type Node struct {
 	leaderID    string
 	entries     []*pb.LogEntry // entries[0] is a sentinel at snapIndex/snapTerm
 	commitIndex uint64
-	lastApplied uint64
+	lastApplied uint64 // handed to the applier
+	// stateIndex is the last index the FSM has actually finished applying;
+	// lastApplied runs ahead of it while a batch is being applied.
+	stateIndex uint64
 
 	nextIndex   map[string]uint64
 	matchIndex  map[string]uint64
 	lastContact map[string]time.Time
-	notify      map[string]chan struct{}
+	// ackSent is, per follower, the send time of the newest request it has
+	// answered in our term. ReadIndex uses it to prove we were still leader
+	// after a read arrived.
+	ackSent map[string]time.Time
+	notify  map[string]chan struct{}
 
 	electionDeadline time.Time
 	lastLeaderSeen   time.Time
@@ -199,7 +206,7 @@ func New(cfg Config) (*Node, error) {
 			return nil, err
 		}
 	}
-	n.commitIndex, n.lastApplied = snapIdx, snapIdx
+	n.commitIndex, n.lastApplied, n.stateIndex = snapIdx, snapIdx, snapIdx
 
 	stored, err := cfg.Storage.LoadLog()
 	if err != nil {
@@ -318,6 +325,7 @@ func (n *Node) becomeLeader() {
 	n.nextIndex = map[string]uint64{}
 	n.matchIndex = map[string]uint64{}
 	n.lastContact = map[string]time.Time{}
+	n.ackSent = map[string]time.Time{}
 	n.notify = map[string]chan struct{}{}
 	n.log.Info("became leader", "term", n.term, "last_index", n.lastIndex())
 
@@ -649,6 +657,7 @@ func (n *Node) sendOnce(id, addr string, term uint64) bool {
 	}
 	n.mu.Unlock()
 
+	sent := time.Now()
 	ctx, cancel := context.WithTimeout(context.Background(), n.cfg.RPCTimeout)
 	resp, err := n.cfg.Transport.AppendEntries(ctx, addr, req)
 	cancel()
@@ -667,6 +676,9 @@ func (n *Node) sendOnce(id, addr string, term uint64) bool {
 		return false
 	}
 	n.lastContact[id] = time.Now()
+	if sent.After(n.ackSent[id]) {
+		n.ackSent[id] = sent
+	}
 	if resp.Success {
 		match := prev + uint64(len(ents))
 		if match > n.matchIndex[id] {
@@ -908,10 +920,14 @@ func (n *Node) applier() {
 		if snap := n.pendingSnap; snap != nil {
 			n.pendingSnap = nil
 			n.lastApplied = n.snapIndex()
+			idx := n.lastApplied
 			n.mu.Unlock()
 			if err := n.cfg.FSM.Restore(snap); err != nil {
 				n.log.Error("restoring snapshot", "err", err)
 			}
+			n.mu.Lock()
+			n.stateIndex = idx
+			n.mu.Unlock()
 			continue
 		}
 		start := n.lastApplied + 1
@@ -928,6 +944,7 @@ func (n *Node) applier() {
 				val = n.cfg.FSM.Apply(e.Index, e.Data)
 			}
 			n.mu.Lock()
+			n.stateIndex = e.Index
 			if f, ok := n.futures[e.Index]; ok {
 				if f.term == e.Term {
 					f.ch <- result{val: val}
@@ -1018,6 +1035,84 @@ func (n *Node) Apply(ctx context.Context, data []byte) (any, error) {
 	case <-ctx.Done():
 		return nil, ErrTimeout
 	}
+}
+
+// ReadIndex implements the read-only query protocol of the Raft thesis
+// (section 6.4) so reads can be served without writing to the log. It
+// returns once this node has proven it was the leader after the call began
+// and has applied everything committed before that point; a read of the
+// local state machine is then linearizable.
+//
+//  1. A new leader does not know the commit index until it has committed
+//     an entry of its own term (the no-op appended on election).
+//  2. Record the commit index, then get a majority to answer a heartbeat
+//     that was sent after this point: nobody else can have been elected in
+//     between, so no write newer than that index can have been acknowledged.
+//  3. Wait until the state machine has applied the recorded index.
+func (n *Node) ReadIndex(ctx context.Context) (uint64, error) {
+	poll := func(cond func() (bool, error)) error {
+		for {
+			n.mu.Lock()
+			ok, err := cond()
+			n.mu.Unlock()
+			if err != nil || ok {
+				return err
+			}
+			select {
+			case <-ctx.Done():
+				return ErrTimeout
+			case <-n.stopCh:
+				return ErrStopped
+			case <-time.After(time.Millisecond):
+			}
+		}
+	}
+	var term uint64
+	err := poll(func() (bool, error) {
+		if n.role != Leader {
+			return false, ErrNotLeader
+		}
+		term = n.term
+		t, _ := n.termAt(n.commitIndex)
+		return t == n.term, nil
+	})
+	if err != nil {
+		return 0, err
+	}
+	n.mu.Lock()
+	if n.role != Leader || n.term != term {
+		n.mu.Unlock()
+		return 0, ErrLeadershipLost
+	}
+	idx := n.commitIndex
+	start := time.Now()
+	for _, ch := range n.notify { // heartbeat now rather than at the next tick
+		select {
+		case ch <- struct{}{}:
+		default:
+		}
+	}
+	n.mu.Unlock()
+
+	if !chaosBug(BugLeaderLocalReads) {
+		err = poll(func() (bool, error) {
+			if n.role != Leader || n.term != term {
+				return false, ErrLeadershipLost
+			}
+			acks := 1
+			for _, t := range n.ackSent {
+				if !t.Before(start) {
+					acks++
+				}
+			}
+			return acks >= n.quorum(), nil
+		})
+		if err != nil {
+			return 0, err
+		}
+	}
+	err = poll(func() (bool, error) { return n.stateIndex >= idx && n.pendingSnap == nil, nil })
+	return idx, err
 }
 
 // Leader returns the current leader's id and address, if known.

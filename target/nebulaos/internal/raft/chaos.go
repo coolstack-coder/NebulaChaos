@@ -31,6 +31,9 @@ const (
 	// The vote is not persisted, so a restarted node can vote twice in a
 	// term.
 	BugForgetVote = "forget-vote"
+	// The leader serves reads from its own state without confirming it is
+	// still the leader (the etcd/Consul stale-read bug from 2014).
+	BugLeaderLocalReads = "leader-local-reads"
 )
 
 func parseChaosBugs(s string) map[string]bool {
