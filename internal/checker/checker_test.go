@@ -122,3 +122,23 @@ func TestRefusedCASCarriesNoInformation(t *testing.T) {
 		t.Fatalf("an evaluated mismatch after the write completed must be a violation, got %v", res)
 	}
 }
+
+// A stale read proven by a later CAS must be explained as a stale read, not
+// as a phantom (the CAS's own expected value needs its writer too).
+func TestWitnessThroughCASIsClosed(t *testing.T) {
+	cas := op(3, history.CAS, "c", 30, 40)
+	cas.Expect = "b"
+	h := []history.Op{
+		op(1, history.Write, "a", 0, 10),
+		op(2, history.Write, "b", 12, 20),
+		cas,
+		op(4, history.Read, "a", 50, 60),
+	}
+	res, m := CheckKey(h, 0)
+	if res != Violation || !closed(m, prepare(h)) {
+		t.Fatalf("got %v with %v, want a closed violation", res, m)
+	}
+	if kind, _ := Explain(m, h); kind != "stale read" {
+		t.Fatalf("explained as %q", kind)
+	}
+}

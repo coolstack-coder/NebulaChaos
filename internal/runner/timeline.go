@@ -68,7 +68,7 @@ h1{margin:0;font-size:24px;letter-spacing:-.02em}h1 small{color:var(--dim);font-
 main{padding:20px 32px 40px}section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px}
 h2{margin:0 0 12px;font-size:16px}.scroll{overflow-x:auto}
 .anom{border-color:#dc2626;box-shadow:0 0 40px rgba(220,38,38,.12)}.anom h2{color:#f87171}
-pre{background:#05070e;border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;font:12.5px/1.6 "JetBrains Mono",ui-monospace,Menlo,monospace;color:#cbd5f5}
+pre{background:#05070e;border:1px solid var(--line);border-radius:10px;padding:12px 14px;white-space:pre-wrap;font:12.5px/1.6 "JetBrains Mono",ui-monospace,Menlo,monospace;color:#cbd5f5}
 .legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:12.5px;margin-bottom:8px}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 table{border-collapse:collapse;width:100%%;font-size:13px}td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--dim);font-weight:500}
 a{color:var(--accent)}

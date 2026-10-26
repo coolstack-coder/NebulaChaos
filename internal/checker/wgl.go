@@ -64,14 +64,14 @@ func (b bitset) key(s string) string {
 func CheckKey(raw []history.Op, budget int) (Result, []history.Op) {
 	ops := prepare(raw)
 	if w := findWitness(ops); w != nil {
-		return Violation, w
+		return Violation, shrinkPrepared(w, ops, budget)
 	}
 	if fast := dropUnobserved(ops); len(fast) < len(ops) {
 		switch res, _ := search(fast, budget); res {
 		case Linearizable:
 			return Linearizable, nil
 		case Violation:
-			if m := shrinkPrepared(fast, budget); selfEvident(m) {
+			if m := shrinkPrepared(fast, fast, budget); selfEvident(m, fast) {
 				return Violation, m
 			}
 		}
@@ -139,10 +139,16 @@ func findWitness(ops []history.Op) []history.Op {
 			continue
 		}
 		if w := done[latest[n-1]]; w.Invoke > bound {
+			out := []history.Op{w, r}
 			if found {
-				return []history.Op{wv, w, r}
+				out = append(out, wv)
 			}
-			return []history.Op{w, r}
+			// A CAS used as the overwrite observed a value too; keep its
+			// writer so the counterexample stays closed and explainable.
+			if we, ok := writer[w.Expect]; w.Kind == history.CAS && ok {
+				out = append(out, we)
+			}
+			return out
 		}
 	}
 	return nil
@@ -155,7 +161,7 @@ func findWitness(ops []history.Op) []history.Op {
 // that failed or timed out: removing operations from a linearization can
 // then only remove state changes, never add one between a write and the
 // read that observed it.
-func selfEvident(m []history.Op) bool {
+func selfEvident(m, full []history.Op) bool {
 	if len(m) == 0 {
 		return false
 	}
@@ -164,7 +170,7 @@ func selfEvident(m []history.Op) bool {
 			return false
 		}
 	}
-	return closed(m, m)
+	return closed(m, full)
 }
 
 func dropUnobserved(ops []history.Op) []history.Op {

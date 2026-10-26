@@ -102,20 +102,20 @@ func Check(ops []history.Op, budget int) Report {
 func Shrink(ops []history.Op, budget int) []history.Op {
 	cur := prepare(ops)
 	if w := findWitness(cur); w != nil {
-		return w
+		return shrinkPrepared(w, cur, budget)
 	}
 	if fast := dropUnobserved(cur); len(fast) < len(cur) {
 		if res, _ := search(fast, budget); res == Violation {
-			if m := shrinkPrepared(fast, budget); selfEvident(m) {
+			if m := shrinkPrepared(fast, fast, budget); selfEvident(m, fast) {
 				return m
 			}
 		}
 	}
-	return shrinkPrepared(cur, budget)
+	return shrinkPrepared(cur, cur, budget)
 }
 
-func shrinkPrepared(cur []history.Op, budget int) []history.Op {
-	full := cur
+// shrinkPrepared minimises cur, keeping it closed with respect to full.
+func shrinkPrepared(cur, full []history.Op, budget int) []history.Op {
 	bad := func(c []history.Op) bool {
 		if !closed(c, full) {
 			return false

@@ -11,6 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/coolstack-coder/nebulachaos/internal/checker"
+	"github.com/coolstack-coder/nebulachaos/internal/history"
 	"github.com/coolstack-coder/nebulachaos/internal/nemesis"
 	"github.com/coolstack-coder/nebulachaos/internal/runner"
 )
@@ -189,4 +191,61 @@ func campaignMarkdown(target, bugs string, rows []campaignRow, took time.Duratio
 	}
 	fmt.Fprintf(&b, "\n_%d runs in %s._\n", tr, took.Round(time.Second))
 	return b.String()
+}
+
+// cmdRecheck re-runs the current checker over every history a campaign
+// recorded and rewrites its results, so published tables always come from
+// the latest checker.
+func cmdRecheck(args []string) error {
+	if len(args) != 1 {
+		return fmt.Errorf("usage: nebulachaos recheck runs/campaign-…")
+	}
+	dir := args[0]
+	b, err := os.ReadFile(filepath.Join(dir, "results.json"))
+	if err != nil {
+		return err
+	}
+	var rows []campaignRow
+	if err := json.Unmarshal(b, &rows); err != nil {
+		return err
+	}
+	changed := 0
+	for _, r := range rows {
+		s := r.Summary
+		ops, err := history.Load(filepath.Join(s.Dir, "history.jsonl"))
+		if err != nil {
+			return err
+		}
+		rep := checker.Check(ops, 3_000_000)
+		var an []string
+		for _, k := range rep.Keys {
+			if k.Anomaly != "" {
+				an = append(an, fmt.Sprintf("%s: %s", k.Key, k.Anomaly))
+			}
+		}
+		if rep.Valid != s.Valid || strings.Join(an, ",") != strings.Join(s.Anomalies, ",") {
+			changed++
+			fmt.Printf("  %s: %v %v → %v %v\n", filepath.Base(s.Dir), s.Valid, s.Anomalies, rep.Valid, an)
+		}
+		s.Valid, s.Unknown, s.Anomalies, s.Agree = rep.Valid, rep.Unknown, an, rep.Agree
+		writeFile(filepath.Join(s.Dir, "check.json"), rep)
+		writeFile(filepath.Join(s.Dir, "summary.json"), s)
+	}
+	out, _ := json.MarshalIndent(rows, "", "  ")
+	_ = os.WriteFile(filepath.Join(dir, "results.json"), out, 0o644)
+	target, bugs := "", ""
+	if len(rows) > 0 {
+		target, bugs = rows[0].Summary.Target, rows[0].Summary.Bugs
+	}
+	md := campaignMarkdown(target, bugs, rows, 0)
+	md = strings.Replace(md, " in 0s._", " (re-checked)._", 1)
+	_ = os.WriteFile(filepath.Join(dir, "results.md"), []byte(md), 0o644)
+	fmt.Printf("re-checked %d runs, %d verdicts or labels changed\n", len(rows), changed)
+	return nil
+}
+
+func writeFile(path string, v any) {
+	if b, err := json.MarshalIndent(v, "", "  "); err == nil {
+		_ = os.WriteFile(path, b, 0o644)
+	}
 }
