@@ -63,7 +63,7 @@ func Check(ops []history.Op, budget int) Report {
 			kr.Result = res.String()
 			if res == Violation {
 				kr.Minimal = Shrink(by[k], budget)
-				kr.Anomaly, kr.Explain = Explain(kr.Minimal)
+				kr.Anomaly, kr.Explain = Explain(kr.Minimal, by[k])
 			}
 			r.Keys[i] = kr
 		}()
@@ -174,7 +174,9 @@ func span(o history.Op) string {
 
 // Explain names the anomaly in a minimal counterexample and describes it in
 // plain words, the way you would explain it to a colleague.
-func Explain(min []history.Op) (string, []string) {
+// all is the full history of the key, used to find writes the shrinker
+// dropped because the client was told they failed.
+func Explain(min, all []history.Op) (string, []string) {
 	var lines []string
 	for _, o := range min {
 		lines = append(lines, fmt.Sprintf("p%d via %s  %-34s %s", o.Process, o.Node, o.String(), span(o)))
@@ -202,6 +204,14 @@ func Explain(min []history.Op) (string, []string) {
 		}
 		ws := writers(seen)
 		if found && len(ws) == 0 {
+			for _, x := range all {
+				if x.Mutates() && x.Value == seen && x.Status == history.Fail {
+					lines = append([]string{fmt.Sprintf("p%d via %s  %-34s %s  error: %s", x.Process, x.Node, x.String(), span(x), x.Error)}, lines...)
+					return "write reported as failed took effect", append(lines, fmt.Sprintf(
+						"The client was told %s failed (%q), yet %s later read its value %q. The cluster applied the command and then answered as if it had not: the client got the opposite of what happened.",
+						x.String(), x.Error, describe(r), seen))
+				}
+			}
 			return "phantom read", append(lines, fmt.Sprintf(
 				"%s observed %q, a value no operation in the history ever wrote.", r.String(), seen))
 		}

@@ -1,0 +1,19 @@
+name: crash-elections
+description: >
+  Crash the leader over and over, and crash a follower in the middle of the
+  election that follows, so nodes restart while votes are being cast.
+duration: 30s
+events:
+  - {at: 2s,    do: kill, target: leader, for: 1500ms}
+  - {at: 2.6s,  do: kill, target: follower, for: 1s}
+  - {at: 6s,    do: kill, target: leader, for: 1500ms}
+  - {at: 6.5s,  do: kill, target: follower, for: 1s}
+  - {at: 10s,   do: kill, target: leader, for: 1500ms}
+  - {at: 10.7s, do: kill, target: follower, for: 1s}
+  - {at: 14s,   do: kill, target: leader, for: 1500ms}
+  - {at: 14.5s, do: kill, target: follower, for: 1s}
+  - {at: 18s,   do: kill, target: leader, for: 1500ms}
+  - {at: 18.6s, do: kill, target: follower, for: 1s}
+  - {at: 22s,   do: kill, target: leader, for: 1500ms}
+  - {at: 22.5s, do: kill, target: follower, for: 1s}
+  - {at: 26s,   do: kill, target: leader, for: 1500ms}

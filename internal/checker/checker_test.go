@@ -26,7 +26,7 @@ func TestStaleReadIsCaught(t *testing.T) {
 	if len(min) != 3 {
 		t.Fatalf("minimal history has %d ops, want 3", len(min))
 	}
-	if kind, _ := Explain(min); kind != "stale read" {
+	if kind, _ := Explain(min, h); kind != "stale read" {
 		t.Fatalf("explained as %q", kind)
 	}
 }
@@ -104,5 +104,21 @@ func TestGeneratedHistoriesAreLinearizableWithoutCorruption(t *testing.T) {
 		if res, _ := CheckKey(h, 0); res != Linearizable {
 			t.Fatalf("history %d should be linearizable by construction:\n%v", i, h)
 		}
+	}
+}
+
+// A CAS that was refused at the TCP level never ran; it must not be read
+// as "the value was not the expected one" (this was a false positive in an
+// early version of NebulaChaos).
+func TestRefusedCASCarriesNoInformation(t *testing.T) {
+	cas := history.Op{Process: 2, Kind: history.CAS, Key: "x", Expect: "a", Value: "b",
+		Invoke: 20, Complete: 20, Status: history.Fail, Error: "connect: connection refused"}
+	h := []history.Op{op(1, history.Write, "a", 0, 10), cas}
+	if res, _ := CheckKey(h, 0); res != Linearizable {
+		t.Fatalf("got %v, want linearizable", res)
+	}
+	h[1].Error = "cas mismatch: key x"
+	if res, _ := CheckKey(h, 0); res != Violation {
+		t.Fatalf("an evaluated mismatch after the write completed must be a violation, got %v", res)
 	}
 }

@@ -1,0 +1,15 @@
+name: bitrot-quorum
+description: >
+  Writes are acknowledged by a bare majority {n1,n2,n3} while n4 and n5 are
+  cut off. Then n1 and n3 crash, one bit rots in n2's Raft log, and n2
+  reboots next to the two nodes that never saw those writes. Raft can only
+  keep its promise if a node with damaged storage refuses to vote as if
+  nothing happened.
+duration: 22s
+events:
+  - {at: 2s,   do: partition, target: "n1 n2 n3 | n4 n5"}
+  - {at: 8s,   do: kill, target: n1}
+  - {at: 8s,   do: kill, target: n3}
+  - {at: 8.1s, do: flip-log, target: n2}
+  - {at: 8.3s, do: heal}
+  - {at: 15s,  do: start}

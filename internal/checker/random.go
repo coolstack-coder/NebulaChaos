@@ -75,7 +75,7 @@ func RandomHistory(r *rand.Rand, procs, opsPer int, corrupt float64) []history.O
 					written = append(written, o.Value)
 				}
 			} else if o.Status == history.OK {
-				o.Status = history.Fail
+				o.Status, o.Error = history.Fail, "cas mismatch"
 			}
 		}
 	}

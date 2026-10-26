@@ -134,8 +134,25 @@ func (n *Nemesis) Do(ctx context.Context, ev Event) {
 		for i := range perm {
 			perm[i]++
 		}
-		switch ev.Target {
-		case "isolate-leader", "leader-alone":
+		switch {
+		case strings.Contains(ev.Target, "|"):
+			// Explicit groups: "n1 n2 n3 | n4 n5".
+			var groups [][]int
+			for _, g := range strings.Split(ev.Target, "|") {
+				var grp []int
+				for _, f := range strings.Fields(strings.ReplaceAll(g, ",", " ")) {
+					grp = append(grp, n.node(f))
+				}
+				groups = append(groups, grp)
+			}
+			c.Mesh.Partition(groups, false)
+			rec.Nodes = groups[0]
+			var parts []string
+			for _, g := range groups {
+				parts = append(parts, "["+ids(g)+"]")
+			}
+			rec.Detail = strings.Join(parts, " | ")
+		case ev.Target == "isolate-leader" || ev.Target == "leader-alone":
 			l := n.node("leader")
 			minority := []int{l}
 			if ev.Target == "isolate-leader" {
@@ -155,7 +172,7 @@ func (n *Nemesis) Do(ctx context.Context, ev Event) {
 			c.Mesh.Partition([][]int{minority, majority}, false)
 			rec.Nodes = minority
 			rec.Detail = fmt.Sprintf("leader %s cut off: [%s] | [%s]", cluster.ID(l), ids(minority), ids(majority))
-		case "ring":
+		case ev.Target == "ring":
 			// Each node talks only to its two ring neighbours: every node
 			// sees a majority (itself + 2), but no two see the same one.
 			pos := map[int]int{}
@@ -167,7 +184,7 @@ func (n *Nemesis) Do(ctx context.Context, ev Event) {
 				return d == 1 || d == N-1
 			}, false)
 			rec.Detail = "majorities ring " + ids(perm)
-		case "bridge":
+		case ev.Target == "bridge":
 			// {a,b} | c | {d,e} where c talks to both sides.
 			bridge := perm[2]
 			left, right := perm[:2], perm[3:]

@@ -1,0 +1,13 @@
+name: powerloss-cluster
+description: >
+  Pull the plug on the whole cluster every few seconds. Everything that was
+  not fsynced is lost (half-written tails included), then all five nodes
+  boot again. Acknowledged writes must survive every cut.
+duration: 30s
+events:
+  - {at: 3s,  do: powerloss, target: all}
+  - {at: 8s,  do: powerloss, target: all}
+  - {at: 13s, do: powerloss, target: all}
+  - {at: 18s, do: powerloss, target: all}
+  - {at: 23s, do: powerloss, target: all}
+  - {at: 27s, do: powerloss, target: all}

@@ -9,6 +9,8 @@
 package checker
 
 import (
+	"strings"
+
 	"github.com/coolstack-coder/nebulachaos/internal/history"
 )
 
@@ -20,8 +22,11 @@ const absent = ""
 // rest:
 //   - a read that did not return (fail or info) says nothing;
 //   - a write that definitely failed never happened;
-//   - a CAS that definitely failed is kept: it says the value was not the
-//     expected one at some point during the call;
+//   - a CAS the state machine evaluated and refused ("cas mismatch") is
+//     kept: it says the value was not the expected one at some point
+//     during the call. A CAS that failed for any other definite reason
+//     (connection refused: it never reached a server) never ran, and is
+//     dropped like a failed write;
 //   - an indeterminate (info) write or CAS may take effect at any time after
 //     it was invoked, so it is left open-ended.
 func prepare(ops []history.Op) []history.Op {
@@ -30,6 +35,7 @@ func prepare(ops []history.Op) []history.Op {
 		switch {
 		case o.Kind == history.Read && o.Status != history.OK:
 		case o.Kind == history.Write && o.Status == history.Fail:
+		case o.Kind == history.CAS && o.Status == history.Fail && !strings.Contains(o.Error, "cas mismatch"):
 		default:
 			out = append(out, o)
 		}
