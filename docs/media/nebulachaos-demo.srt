@@ -1,0 +1,143 @@
+1
+00:00:00,500 --> 00:00:03,500
+NebulaChaos: a correctness lab for my Raft cluster, NebulaOS.
+
+2
+00:00:03,600 --> 00:00:06,800
+Part 2 of the series. Part 1 showed it survives crashes.
+
+3
+00:00:07,321 --> 00:00:10,621
+NebulaOS heals from a leader crash in 3.2 seconds.
+
+4
+00:00:10,721 --> 00:00:13,921
+But surviving a crash is not the same as staying correct.
+
+5
+00:00:14,021 --> 00:00:17,321
+So I built a tester whose only job is to make the cluster lie.
+
+6
+00:00:17,835 --> 00:00:21,535
+Five real NebulaOS processes, a proxy on each of the 20 network links.
+
+7
+00:00:21,635 --> 00:00:25,635
+Clients read, write and compare-and-set while the nemesis breaks things.
+
+8
+00:00:25,735 --> 00:00:29,835
+Every operation is recorded, then checked: could one correct machine have done this?
+
+9
+00:00:30,345 --> 00:00:36,345
+Bug 1. First run against upstream NebulaOS.
+
+10
+00:00:36,853 --> 00:00:39,353
+nebulachaos run: 10 clients, and the leader is cut off twice.
+
+11
+00:00:39,453 --> 00:00:42,153
+Real output, sped up. The checker reads all 9,000 operations.
+
+12
+00:00:42,253 --> 00:00:45,218
+Not linearizable, on every key.
+
+13
+00:00:45,468 --> 00:00:48,468
+A replay of that exact run, 0.16 s in. No fault injected yet.
+
+14
+00:00:48,568 --> 00:00:52,868
+write 7.5 is acknowledged. Then a read on n2 returns the older 5.3.
+
+15
+00:00:52,968 --> 00:00:57,568
+A follower answered from its own copy, one heartbeat behind the leader.
+
+16
+00:00:58,318 --> 00:01:04,818
+The fix: the ReadIndex protocol from Ongaro's Raft thesis.
+
+17
+00:01:05,324 --> 00:01:08,324
+Same schedule, same seed, fixed build.
+
+18
+00:01:08,424 --> 00:01:12,364
+Linearizable. 10 of 10 runs failed before the fix, 0 of 10 after.
+
+19
+00:01:12,714 --> 00:01:19,214
+Bug 2. Under the first post, Ram pointed at durability. So I went after the disk.
+
+20
+00:01:19,722 --> 00:01:23,022
+n4 and n5 are cut off. Only n1, n2 and n3 acknowledge writes.
+
+21
+00:01:23,122 --> 00:01:26,022
+n1 and n3 crash. One bit flips in n2's Raft log.
+
+22
+00:01:26,122 --> 00:01:30,022
+n2 silently drops 72 log entries, then wins an election with n4 and n5.
+
+23
+00:01:30,122 --> 00:01:37,422
+An acknowledged write is gone: a later read returns the older value.
+
+24
+00:01:39,406 --> 00:01:45,906
+The fix: tell corruption apart from a torn write, and refuse to start.
+
+25
+00:01:46,412 --> 00:01:50,312
+Same schedule after the fix: n2 refuses to start.
+
+26
+00:01:50,412 --> 00:01:56,612
+No quorum for 7.6 s until n1 and n3 return. Unavailable, never wrong.
+
+27
+00:01:57,235 --> 00:02:03,235
+Bug 3 needed leader churn: the leader is killed every two seconds.
+
+28
+00:02:03,743 --> 00:02:06,843
+Leaders keep dying while 20 clients write through every node.
+
+29
+00:02:06,943 --> 00:02:11,043
+A client is told "cas mismatch", yet a read returns the very value that CAS wrote.
+
+30
+00:02:11,143 --> 00:02:16,043
+Fix: a request id assigned once, so a retried command is applied at most once.
+
+31
+00:02:20,373 --> 00:02:24,473
+Is the checker any good? I planted four known Raft bugs behind flags.
+
+32
+00:02:24,573 --> 00:02:28,873
+It caught three. The fourth needs millisecond timing: a job for deterministic simulation.
+
+33
+00:02:29,382 --> 00:02:33,682
+Each bug, on the same fault schedules, before and after its fix.
+
+34
+00:02:33,782 --> 00:02:38,882
+After the fixes: 60 randomized fault runs, 284,732 operations, all linearizable.
+
+35
+00:02:39,389 --> 00:02:43,289
+The protocol was fine. The bugs lived in the plumbing around it.
+
+36
+00:02:43,389 --> 00:02:47,389
+Thank you for watching. Code and every run: github.com/coolstack-coder/NebulaChaos

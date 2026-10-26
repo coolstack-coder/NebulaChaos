@@ -1,0 +1,85 @@
+{
+  "name": "nebulachaos-demo",
+  "out": "../../docs/media",
+  "tmp": "../../.cache/video",
+  "crf": 27,
+  "segments": [
+    {"type": "stage", "scene": "intro", "dur": 7, "subs": [
+      [0.5, 3.5, "NebulaChaos: a correctness lab for my Raft cluster, NebulaOS."],
+      [3.6, 6.8, "Part 2 of the series. Part 1 showed it survives crashes."]]},
+
+    {"type": "stage", "scene": "context", "dur": 10.5, "subs": [
+      [0.3, 3.6, "NebulaOS heals from a leader crash in 3.2 seconds."],
+      [3.7, 6.9, "But surviving a crash is not the same as staying correct."],
+      [7.0, 10.3, "So I built a tester whose only job is to make the cluster lie."]]},
+
+    {"type": "stage", "scene": "how", "dur": 12.5, "subs": [
+      [0.3, 4.0, "Five real NebulaOS processes, a proxy on each of the 20 network links."],
+      [4.1, 8.1, "Clients read, write and compare-and-set while the nemesis breaks things."],
+      [8.2, 12.3, "Every operation is recorded, then checked: could one correct machine have done this?"]]},
+
+    {"type": "stage", "scene": "bug", "dur": 6.5, "data": {"n": 1, "title": "Stale reads — with zero faults", "lead": "Upstream NebulaOS answered every read from the local replica of whichever node you asked."}, "subs": [
+      [0.3, 6.3, "Bug 1. First run against upstream NebulaOS."]]},
+
+    {"type": "term", "cast": "../../.cache/video-src/cast-base.json", "speed": 4, "maxGap": 0.9, "hold": 3.5, "subs": [
+      [0.3, 2.8, "nebulachaos run: 10 clients, and the leader is cut off twice."],
+      [2.9, 5.6, "Real output, sped up. The checker reads all 9,000 operations."],
+      [5.7, 9, "Not linearizable, on every key."]]},
+
+    {"type": "replay", "data": "../../.cache/video-src/replay-base.json", "from": 0, "speed": 0.5, "freeze": 10, "label": "upstream NebulaOS", "still": "anomaly-stale-read.png", "subs": [
+      [0.2, 3.2, "A replay of that exact run, 0.16 s in. No fault injected yet."],
+      [3.3, 7.6, "write 7.5 is acknowledged. Then a read on n2 returns the older 5.3."],
+      [7.7, 12.3, "A follower answered from its own copy, one heartbeat behind the leader."]]},
+
+    {"type": "stage", "scene": "fix", "dur": 7, "data": {"title": "ReadIndex on the leader,<br>a read barrier on followers", "lead": "Confirm leadership with a quorum heartbeat sent after the read arrived (Raft thesis §6.4), then serve once that index is applied."}, "subs": [
+      [0.3, 6.8, "The fix: the ReadIndex protocol from Ongaro's Raft thesis."]]},
+
+    {"type": "term", "cast": "../../.cache/video-src/cast-fixed.json", "speed": 5, "maxGap": 0.8, "hold": 2.5, "subs": [
+      [0.3, 3.3, "Same schedule, same seed, fixed build."],
+      [3.4, 8, "Linearizable. 10 of 10 runs failed before the fix, 0 of 10 after."]]},
+
+    {"type": "stage", "scene": "bug", "dur": 7, "data": {"n": 2, "title": "One flipped bit erased acknowledged writes", "lead": "Writes land on a bare majority. Two of those nodes crash. One bit rots on the third."}, "subs": [
+      [0.3, 6.8, "Bug 2. Under the first post, Ram pointed at durability. So I went after the disk."]]},
+
+    {"type": "replay", "data": "../../.cache/video-src/replay-bitrot-before.json", "from": 1, "speed": 1.2, "freeze": 10, "label": "before the recovery fix", "still": "anomaly-bitrot.png", "subs": [
+      [0.3, 3.6, "n4 and n5 are cut off. Only n1, n2 and n3 acknowledge writes."],
+      [3.7, 6.6, "n1 and n3 crash. One bit flips in n2's Raft log."],
+      [6.7, 10.6, "n2 silently drops 72 log entries, then wins an election with n4 and n5."],
+      [10.7, 18, "An acknowledged write is gone: a later read returns the older value."]]},
+
+    {"type": "stage", "scene": "fix", "dur": 7, "data": {"title": "Refuse to start on damaged storage", "lead": "A bad record followed by intact records is corruption, not a torn write. Snapshot headers are checksummed too."}, "subs": [
+      [0.3, 6.8, "The fix: tell corruption apart from a torn write, and refuse to start."]]},
+
+    {"type": "replay", "data": "../../.cache/video-src/replay-bitrot-after.json", "from": 7, "to": 19, "speed": 2, "freeze": 4.5, "label": "after the fix", "subs": [
+      [0.3, 4.2, "Same schedule after the fix: n2 refuses to start."],
+      [4.3, 10.5, "No quorum for 7.6 s until n1 and n3 return. Unavailable, never wrong."]]},
+
+    {"type": "stage", "scene": "bug", "dur": 6.5, "data": {"n": 3, "title": "A successful write reported as failed", "lead": "A leader dies mid-request. The node retries. The command runs twice."}, "subs": [
+      [0.3, 6.3, "Bug 3 needed leader churn: the leader is killed every two seconds."]]},
+
+    {"type": "replay", "data": "../../.cache/video-src/replay-dup.json", "from": 18.4, "speed": 1, "freeze": 10, "label": "before the exactly-once fix", "still": "anomaly-double-apply.png", "subs": [
+      [0.3, 3.4, "Leaders keep dying while 20 clients write through every node."],
+      [3.5, 7.6, "A client is told \"cas mismatch\", yet a read returns the very value that CAS wrote."],
+      [7.7, 12.6, "Fix: a request id assigned once, so a retried command is applied at most once."]]},
+
+    {"type": "stage", "scene": "zoo", "dur": 9, "data": {"rows": [
+      ["leader-local-reads · reads without confirming leadership", "caught, attempt 2", true],
+      ["ack-before-commit · acknowledge before a majority has it", "caught, attempt 1", true],
+      ["leader-skips-fsync · count unsynced log as durable", "caught, attempt 4", true],
+      ["forget-vote · vote not persisted across a crash", "not caught in 5 tries", false]]}, "subs": [
+      [0.3, 4.4, "Is the checker any good? I planted four known Raft bugs behind flags."],
+      [4.5, 8.8, "It caught three. The fourth needs millisecond timing: a job for deterministic simulation."]]},
+
+    {"type": "stage", "scene": "results", "dur": 10, "data": {"rows": [
+      ["Stale reads", "isolate-leader", "10 / 10 runs", "0 / 10"],
+      ["Bit rot erased writes", "bitrot-quorum", "9 / 10 runs", "0 / 10"],
+      ["Command applied twice", "leader-churn", "4 / 15 runs", "0 / 15"]],
+      "stats": [["3", "real bugs found and fixed"], ["20,000", "random histories: own checker = Porcupine"], ["284,732", "operations in 60 random fault runs, all linearizable"]]}, "subs": [
+      [0.3, 4.6, "Each bug, on the same fault schedules, before and after its fix."],
+      [4.7, 9.8, "After the fixes: 60 randomized fault runs, 284,732 operations, all linearizable."]]},
+
+    {"type": "stage", "scene": "outro", "dur": 8.5, "subs": [
+      [0.3, 4.2, "The protocol was fine. The bugs lived in the plumbing around it."],
+      [4.3, 8.3, "Thank you for watching. Code and every run: github.com/coolstack-coder/NebulaChaos"]]}
+  ]
+}

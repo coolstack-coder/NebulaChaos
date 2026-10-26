@@ -227,7 +227,7 @@ func Explain(min, all []history.Op) (string, []string) {
 				if x.Mutates() && x.Value == seen && x.Status == history.Fail {
 					lines = append([]string{fmt.Sprintf("p%d via %s  %-34s %s  error: %s", x.Process, x.Node, x.String(), span(x), x.Error)}, lines...)
 					return "write reported as failed took effect", append(lines, fmt.Sprintf(
-						"The client was told %s failed (%q), yet %s later read its value %q. The cluster applied the command and then answered as if it had not: the client got the opposite of what happened.",
+						"The client was told %s failed (%s), yet %s read its value %q. The cluster applied the command and then answered as if it had not: the client got the opposite of what happened.",
 						x.String(), x.Error, describe(r), seen))
 				}
 			}

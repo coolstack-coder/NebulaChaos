@@ -5,6 +5,7 @@
 //	nebulachaos zoo       prove the checker catches deliberately planted bugs
 //	nebulachaos check     re-check a recorded history.jsonl
 //	nebulachaos recheck   re-check every run of a campaign with the current checker
+//	nebulachaos report    re-render a run's HTML report
 //	nebulachaos selftest  cross-check the WGL checker against Porcupine
 package main
 
@@ -22,6 +23,7 @@ usage:
   nebulachaos zoo      [--target REF] [flags]
   nebulachaos check    history.jsonl
   nebulachaos recheck  runs/campaign-…
+  nebulachaos report   runs/<run>
   nebulachaos selftest [--n 10000]
 
 run "nebulachaos <command> -h" for flags.`)
@@ -44,6 +46,8 @@ func main() {
 		err = cmdCheck(os.Args[2:])
 	case "recheck":
 		err = cmdRecheck(os.Args[2:])
+	case "report":
+		err = cmdReport(os.Args[2:])
 	case "selftest":
 		err = cmdSelftest(os.Args[2:])
 	default:

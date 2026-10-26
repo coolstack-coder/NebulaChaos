@@ -16,7 +16,7 @@ import (
 var faultColor = map[string]string{
 	"partition": "#f97316", "delay": "#eab308", "pause": "#a855f7", "kill": "#ef4444",
 	"powerloss": "#dc2626", "flip-log": "#ec4899", "corrupt-snapshot": "#ec4899",
-	"snapshot-header": "#ec4899", "delete-snapshot": "#ec4899",
+	"snapshot-header": "#ec4899", "delete-snapshot": "#ec4899", "heal": "#22c55e", "start": "#22c55e", "resume": "#22c55e",
 }
 
 func opColor(o history.Op) string {
@@ -221,23 +221,36 @@ func zoomSVG(min []history.Op, faults []nemesis.Record) string {
 	}
 	pad := max((hi-lo)/8, 20e6)
 	lo, hi = lo-pad, hi+pad
-	const W, rowH, top, left = 1100.0, 44, 26, 330
-	x := func(t int64) float64 { return left + float64(t-lo)/float64(hi-lo)*(W-left-20) }
-	h := top + len(min)*rowH + 28
-	var b strings.Builder
-	fmt.Fprintf(&b, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" style="width:100%%;max-width:%dpx" font-family="Inter,system-ui,sans-serif">`, int(W), h, int(W))
+	var vis []nemesis.Record
 	for _, f := range faults {
 		e := f.End
 		if e == 0 {
 			e = hi
 		}
-		if e < lo || f.At > hi {
-			continue
+		if e >= lo && f.At <= hi {
+			vis = append(vis, f)
+		}
+	}
+	// One label line per fault, stacked, so overlapping faults stay legible.
+	const W, rowH, left = 1100.0, 44, 330
+	top := 14 + 15*len(vis)
+	x := func(t int64) float64 { return left + float64(t-lo)/float64(hi-lo)*(W-left-20) }
+	h := top + len(min)*rowH + 28
+	var b strings.Builder
+	fmt.Fprintf(&b, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" style="width:100%%;max-width:%dpx" font-family="Inter,system-ui,sans-serif">`, int(W), h, int(W))
+	for i, f := range vis {
+		e := f.End
+		if e == 0 {
+			e = hi
 		}
 		s, en := max(f.At, lo), min64(e, hi)
 		c := faultColor[f.Do]
-		fmt.Fprintf(&b, `<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="%s" opacity=".12"/><text x="%.1f" y="16" fill="%s" font-size="12">%s</text>`,
-			x(s), top-6, x(en)-x(s), len(min)*rowH+6, c, x(s)+4, c, html.EscapeString(f.Detail))
+		label := f.Detail
+		if len(label) > 90 {
+			label = label[:87] + "…"
+		}
+		fmt.Fprintf(&b, `<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="%s" opacity=".10"/><text x="%d" y="%d" fill="%s" font-size="12">%.2fs %s: %s</text>`,
+			x(s), top-6, math.Max(x(en)-x(s), 2), len(min)*rowH+6, c, left, 12+15*i, c, float64(f.At)/1e9, f.Do, html.EscapeString(label))
 	}
 	for i, o := range min {
 		y := top + i*rowH

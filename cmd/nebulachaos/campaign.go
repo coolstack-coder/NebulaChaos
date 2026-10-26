@@ -249,3 +249,34 @@ func writeFile(path string, v any) {
 		_ = os.WriteFile(path, b, 0o644)
 	}
 }
+
+// cmdReport re-renders a run's HTML report from its saved files.
+func cmdReport(args []string) error {
+	if len(args) != 1 {
+		return fmt.Errorf("usage: nebulachaos report runs/<run>")
+	}
+	dir := args[0]
+	var sum runner.Summary
+	var faults []nemesis.Record
+	for name, v := range map[string]any{"summary.json": &sum, "nemesis.json": &faults} {
+		b, err := os.ReadFile(filepath.Join(dir, name))
+		if err != nil {
+			return err
+		}
+		if err := json.Unmarshal(b, v); err != nil {
+			return err
+		}
+	}
+	ops, err := history.Load(filepath.Join(dir, "history.jsonl"))
+	if err != nil {
+		return err
+	}
+	rep := checker.Check(ops, 3_000_000)
+	writeFile(filepath.Join(dir, "check.json"), rep)
+	out := filepath.Join(dir, "timeline.html")
+	if err := runner.WriteTimeline(out, &sum, ops, faults, rep); err != nil {
+		return err
+	}
+	fmt.Println(out)
+	return nil
+}

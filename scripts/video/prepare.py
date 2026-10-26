@@ -30,6 +30,11 @@ bad_ids, anomaly = set(), None
 if cands:
     k = cands[0]
     bad_ids = {o["id"] for o in k["minimal"]}
+    if k["anomaly"].startswith("write reported as failed"):
+        # The shrunk history is just the read; show the "failed" write too.
+        seen = {o.get("value") for o in k["minimal"] if o["kind"] == "read"}
+        bad_ids |= {o["id"] for o in ops if o["key"] == k["key"] and o["kind"] != "read"
+                    and o["status"] == "fail" and o.get("value") in seen}
     anomaly = {"key": k["key"], "kind": k["anomaly"], "explain": k["explain"], "ops": sorted(bad_ids)}
 
 # Leadership changes from the node logs (absolute wall clock -> run time).
