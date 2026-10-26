@@ -51,6 +51,9 @@ type FileStorage struct {
 
 	mu   sync.Mutex // guards logF, which RewriteLog swaps
 	logF *os.File
+	// gen counts log rewrites so a slow Sync of a replaced file can't
+	// record a stale durable length (NEBULA_CHAOS_LEDGER only).
+	gen uint64
 }
 
 // NewFileStorage opens (or creates) Raft storage under dir. When sync is
@@ -66,6 +69,12 @@ func NewFileStorage(dir string, sync bool) (*FileStorage, error) {
 		return nil, err
 	}
 	s.logF = f
+	if chaosLedger {
+		// Whatever survived the last crash is, by definition, on disk.
+		if st, err := f.Stat(); err == nil {
+			s.writeLedger(st.Size())
+		}
+	}
 	return s, nil
 }
 
@@ -175,13 +184,26 @@ func (s *FileStorage) Sync() error {
 		return nil
 	}
 	s.mu.Lock()
-	f := s.logF
+	f, gen := s.logF, s.gen
+	var size int64 = -1
+	if chaosLedger {
+		if st, err := f.Stat(); err == nil {
+			size = st.Size()
+		}
+	}
 	s.mu.Unlock()
 	err := f.Sync()
 	if errors.Is(err, os.ErrClosed) {
 		// RewriteLog replaced the file meanwhile; it fsyncs the new one,
 		// which holds every entry we were asked to make durable.
 		return nil
+	}
+	if err == nil && size >= 0 {
+		s.mu.Lock()
+		if s.gen == gen {
+			s.writeLedger(size)
+		}
+		s.mu.Unlock()
 	}
 	return err
 }
@@ -202,6 +224,10 @@ func (s *FileStorage) RewriteLog(entries []*pb.LogEntry) error {
 		return err
 	}
 	s.logF = f
+	s.gen++
+	if chaosLedger && s.sync {
+		s.writeLedger(int64(len(b)))
+	}
 	return nil
 }
 

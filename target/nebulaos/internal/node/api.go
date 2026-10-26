@@ -54,6 +54,7 @@ func (n *Node) routes() http.Handler {
 	mux.HandleFunc("PATCH /api/services/{name}", n.handlePatchService)
 	mux.HandleFunc("DELETE /api/services/{name}", n.handleDeleteService)
 	mux.HandleFunc("POST /api/nodes/{id}/{action}", n.handleNodeAction)
+	n.kvRoutes(mux)
 	if n.cfg.UI != nil {
 		mux.Handle("/", n.cfg.UI)
 	}

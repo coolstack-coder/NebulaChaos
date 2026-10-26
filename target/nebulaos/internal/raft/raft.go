@@ -280,7 +280,11 @@ func (n *Node) randomTimeout() time.Duration {
 func (n *Node) resetElectionTimer() { n.electionDeadline = time.Now().Add(n.randomTimeout()) }
 
 func (n *Node) persistState() {
-	if err := n.cfg.Storage.SaveState(n.term, n.votedFor); err != nil {
+	voted := n.votedFor
+	if chaosBug(BugForgetVote) {
+		voted = ""
+	}
+	if err := n.cfg.Storage.SaveState(n.term, voted); err != nil {
 		// Losing the vote record could let us vote twice in a term, which
 		// breaks election safety. Refuse to continue.
 		panic("raft: persisting hard state: " + err.Error())
@@ -744,8 +748,13 @@ func (n *Node) persister() {
 		n.mu.Lock()
 		target := n.lastIndex()
 		n.mu.Unlock()
-		if err := n.cfg.Storage.Sync(); err != nil {
-			panic("raft: fsync: " + err.Error())
+		n.mu.Lock()
+		skip := n.role == Leader && chaosBug(BugLeaderSkipsFsync)
+		n.mu.Unlock()
+		if !skip {
+			if err := n.cfg.Storage.Sync(); err != nil {
+				panic("raft: fsync: " + err.Error())
+			}
 		}
 		n.mu.Lock()
 		if target > n.durable {
@@ -994,6 +1003,10 @@ func (n *Node) Apply(ctx context.Context, data []byte) (any, error) {
 		return nil, ErrNotLeader
 	}
 	idx := n.appendLocal(&pb.LogEntry{Type: pb.EntryType_ENTRY_COMMAND, Data: data})
+	if chaosBug(BugAckBeforeCommit) {
+		n.mu.Unlock()
+		return nil, nil
+	}
 	f := &future{term: n.term, ch: make(chan result, 1)}
 	n.futures[idx] = f
 	n.advanceCommit() // single-node clusters commit immediately

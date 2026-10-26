@@ -25,6 +25,8 @@ const (
 	OpUpdateTasks   Op = "update_tasks"
 	OpRemoveTasks   Op = "remove_tasks"
 	OpRecordEvent   Op = "record_event"
+	OpKVPut         Op = "kv_put"
+	OpKVCAS         Op = "kv_cas"
 )
 
 // Command is the unit replicated through Raft. Everything the state machine
@@ -49,6 +51,11 @@ type Command struct {
 	TaskIDs     []string     `json:"task_ids,omitempty"`
 
 	Event *Event `json:"event,omitempty"`
+
+	// Key/value register used by the NebulaChaos test workload.
+	Key    string  `json:"key,omitempty"`
+	Value  *string `json:"value,omitempty"`
+	Expect *string `json:"expect,omitempty"`
 }
 
 type ServicePatch struct {
@@ -90,10 +97,11 @@ type Snapshot struct {
 	Events   []Event             `json:"events"`
 	EventSeq uint64              `json:"event_seq"`
 	Applied  uint64              `json:"applied_index"`
+	KV       map[string]string   `json:"kv,omitempty"`
 }
 
 func emptySnapshot() *Snapshot {
-	return &Snapshot{Nodes: map[string]*Node{}, Services: map[string]*Service{}, Tasks: map[string]*Task{}}
+	return &Snapshot{Nodes: map[string]*Node{}, Services: map[string]*Service{}, Tasks: map[string]*Task{}, KV: map[string]string{}}
 }
 
 // FSM implements raft.FSM. Readers use View, which returns a deep copy, so
@@ -137,6 +145,9 @@ func (f *FSM) Restore(data []byte) error {
 	if err := json.Unmarshal(data, s); err != nil {
 		return err
 	}
+	if s.KV == nil {
+		s.KV = map[string]string{}
+	}
 	f.mu.Lock()
 	f.s = s
 	f.mu.Unlock()
@@ -154,6 +165,7 @@ func (f *FSM) View() *Snapshot {
 		Events:   append([]Event(nil), f.s.Events...),
 		EventSeq: f.s.EventSeq,
 		Applied:  f.s.Applied,
+		KV:       maps.Clone(f.s.KV),
 	}
 	for k, v := range f.s.Nodes {
 		n := *v
@@ -191,6 +203,8 @@ func (f *FSM) event(c *Command, kind, msg, node, svc string) {
 func (f *FSM) apply(c *Command) error {
 	s := f.s
 	switch c.Op {
+	case OpKVPut, OpKVCAS:
+		return s.applyKV(c)
 	case OpRegisterNode:
 		if c.Node == nil || c.Node.ID == "" {
 			return errors.New("register_node: missing node")
