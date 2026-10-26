@@ -1,0 +1,6 @@
+/bin/
+/runs/
+/.cache/
+*.test
+.DS_Store
+node_modules/
