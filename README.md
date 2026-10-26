@@ -8,6 +8,7 @@
 
 **A Jepsen-style correctness lab for [NebulaOS](https://github.com/coolstack-coder/NebulaOS): real processes, real faults, every operation recorded, every history checked for linearizability.**
 
+[![CI](https://github.com/coolstack-coder/NebulaChaos/actions/workflows/ci.yml/badge.svg)](https://github.com/coolstack-coder/NebulaChaos/actions/workflows/ci.yml)
 ![Go](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go&logoColor=white)
 ![checker](https://img.shields.io/badge/checker-WGL%20%2B%20Porcupine-7c3aed)
 ![faults](https://img.shields.io/badge/faults-partitions%20·%20pauses%20·%20crashes%20·%20power%20loss%20·%20bit%20rot-ef4444)
