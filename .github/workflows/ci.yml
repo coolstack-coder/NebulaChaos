@@ -1,0 +1,52 @@
+name: ci
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 3 * * *" # nightly: a longer randomized campaign
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 } # build targets come from git tags
+      - uses: actions/setup-go@v5
+        with: { go-version: "1.26.x" }
+      - name: vet + unit tests (checker cross-validated against Porcupine)
+        run: |
+          go vet ./...
+          go test ./...
+      - name: NebulaOS tests (including the corruption and dedup regressions)
+        working-directory: target/nebulaos
+        run: go test ./...
+      - name: checker self-test
+        run: go run ./cmd/nebulachaos selftest --n 5000
+
+  chaos:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-go@v5
+        with: { go-version: "1.26.x" }
+      - run: go build -o bin/nebulachaos ./cmd/nebulachaos
+      - name: the fixed build must stay linearizable
+        run: |
+          ./bin/nebulachaos run --target HEAD --schedule schedules/isolate-leader.yaml --seed 1
+          ./bin/nebulachaos run --target HEAD --schedule schedules/crash-elections.yaml --seed 1
+          ./bin/nebulachaos run --target HEAD --schedule schedules/bitrot-quorum.yaml --seed 1 --snapshot-every 1000000
+      - name: nightly randomized campaign
+        if: github.event_name == 'schedule'
+        run: ./bin/nebulachaos campaign --target HEAD --profiles partitions,pauses,crashes,disk,mixed --seeds 1-4 --duration 20s
+      - name: the checker must still catch a planted bug
+        run: |
+          if ./bin/nebulachaos run --target HEAD --schedule schedules/isolate-leader.yaml --seed 1 --bugs ack-before-commit; then
+            echo "planted bug was not caught"; exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: runs
+          path: runs/**/{timeline.html,porcupine.html,summary.json,check.json,nemesis.json,schedule.yaml}

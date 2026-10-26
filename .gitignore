@@ -4,3 +4,5 @@
 *.test
 .DS_Store
 node_modules/
+scripts/video/node_modules
+LAUNCH_KIT.md

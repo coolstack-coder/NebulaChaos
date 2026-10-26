@@ -47,7 +47,16 @@ func cmdCampaign(args []string) error {
 	c.register(fs)
 	profiles := fs.String("profiles", "partitions,pauses,crashes,disk,mixed", "comma-separated profiles")
 	seedsArg := fs.String("seeds", "1-5", "seeds, e.g. 1-20 or 3,7,9")
+	schedule := fs.String("schedule", "", "run this fixed schedule for every seed instead of generated ones")
 	fs.Parse(args)
+	var fixed *nemesis.Schedule
+	if *schedule != "" {
+		var err error
+		if fixed, err = nemesis.Load(*schedule); err != nil {
+			return err
+		}
+		*profiles = fixed.Name
+	}
 	seeds, err := parseSeeds(*seedsArg)
 	if err != nil {
 		return fmt.Errorf("--seeds: %w", err)
@@ -76,9 +85,11 @@ func cmdCampaign(args []string) error {
 				break
 			}
 			n++
-			s, err := nemesis.Generate(seed, p, c.duration)
-			if err != nil {
-				return err
+			s := fixed
+			if s == nil {
+				if s, err = nemesis.Generate(seed, p, c.duration); err != nil {
+					return err
+				}
 			}
 			sum, err := runOne(ctx, &c, bin, s, seed, false)
 			if err != nil {

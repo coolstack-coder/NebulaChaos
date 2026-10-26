@@ -45,24 +45,25 @@ type Stall struct {
 
 // Summary is the one-file result of a run.
 type Summary struct {
-	Name        string           `json:"name"`
-	Target      string           `json:"target"`
-	Bugs        string           `json:"bugs,omitempty"`
-	Seed        uint64           `json:"seed"`
-	Duration    float64          `json:"duration_s"`
-	Valid       bool             `json:"valid"`
-	Unknown     bool             `json:"unknown"`
-	Anomalies   []string         `json:"anomalies,omitempty"`
-	Ops         int              `json:"ops"`
-	OK          int              `json:"ok"`
-	Fail        int              `json:"fail"`
-	Info        int              `json:"info"`
-	Faults      int              `json:"faults"`
-	Stalls      []Stall          `json:"stalls,omitempty"`
+	Name        string            `json:"name"`
+	Target      string            `json:"target"`
+	Bugs        string            `json:"bugs,omitempty"`
+	Seed        uint64            `json:"seed"`
+	StartUnixMs int64             `json:"start_unix_ms"`
+	Duration    float64           `json:"duration_s"`
+	Valid       bool              `json:"valid"`
+	Unknown     bool              `json:"unknown"`
+	Anomalies   []string          `json:"anomalies,omitempty"`
+	Ops         int               `json:"ops"`
+	OK          int               `json:"ok"`
+	Fail        int               `json:"fail"`
+	Info        int               `json:"info"`
+	Faults      int               `json:"faults"`
+	Stalls      []Stall           `json:"stalls,omitempty"`
 	Refused     map[string]string `json:"refused_to_start,omitempty"`
-	Agree       bool             `json:"checkers_agree"`
-	CheckMillis int64            `json:"check_ms"`
-	Dir         string           `json:"dir"`
+	Agree       bool              `json:"checkers_agree"`
+	CheckMillis int64             `json:"check_ms"`
+	Dir         string            `json:"dir"`
 }
 
 func (o *Options) logf(format string, args ...any) {
@@ -149,7 +150,7 @@ func Run(ctx context.Context, o Options) (*Summary, error) {
 	}
 
 	sum := &Summary{
-		Name: s.Name, Target: o.Target, Bugs: o.Bugs, Seed: o.Seed,
+		Name: s.Name, Target: o.Target, Bugs: o.Bugs, Seed: o.Seed, StartUnixMs: start.UnixMilli(),
 		Duration: elapsed.Seconds(), Valid: rep.Valid, Unknown: rep.Unknown,
 		Ops: rep.Ops, OK: rep.OK, Fail: rep.Fail, Info: rep.Info,
 		Faults: len(faults), Agree: rep.Agree, CheckMillis: rep.CheckTime.Milliseconds(), Dir: o.Out,
