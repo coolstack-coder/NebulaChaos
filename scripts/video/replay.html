@@ -1,0 +1,145 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>NebulaChaos replay</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070912;--panel:#0d1120;--line:#1d2340;--text:#e6e9f7;--dim:#8b93b8;--acc:#a78bfa;--ok:#22c55e;--read:#38bdf8;--cas:#a78bfa;--info:#f59e0b;--bad:#ef4444}
+*{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+body{background:radial-gradient(1200px 700px at 20% 30%,rgba(124,58,237,.16),transparent 60%),radial-gradient(900px 600px at 90% 80%,rgba(34,211,238,.08),transparent 60%),var(--bg)}
+#top{position:absolute;left:48px;right:48px;top:28px;height:70px;display:flex;align-items:center;gap:22px}
+#top h1{margin:0;font-size:30px;letter-spacing:-.02em;font-weight:800}#top h1 span{color:var(--acc)}
+#run{color:var(--dim);font-size:19px}#run b{color:var(--text);font-weight:600}
+.chip{padding:6px 14px;border-radius:999px;font-weight:700;font-size:15px;letter-spacing:.04em}
+#target.base{background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.5)}
+#target.fixed{background:rgba(34,197,94,.12);color:#86efac;border:1px solid rgba(34,197,94,.5)}
+#clock{margin-left:auto;font:600 34px "JetBrains Mono",monospace;color:#c4b5fd}#speed{color:var(--dim);font-size:15px;min-width:120px;text-align:right}
+#cluster{position:absolute;left:30px;top:110px;width:900px;height:660px}
+#feed{position:absolute;left:960px;top:118px;width:912px;height:650px;background:rgba(13,17,32,.85);border:1px solid var(--line);border-radius:18px;padding:18px 22px;overflow:hidden}
+#feed h2{margin:0 0 10px;font-size:16px;color:var(--dim);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.row{display:grid;grid-template-columns:92px 120px 1fr 110px;gap:10px;align-items:center;font:15.5px "JetBrains Mono",monospace;padding:6px 10px;border-radius:9px;margin-bottom:4px;animation:in .12s ease-out}
+@keyframes in{from{opacity:.3}to{opacity:1}}
+.row .t{color:var(--dim)}.row .route{color:#94a3b8}.res{justify-self:end;font-weight:600;font-family:Inter;font-size:14px;padding:3px 10px;border-radius:999px}
+.res.ok{background:rgba(34,197,94,.14);color:#86efac}.res.fail{background:rgba(100,116,139,.2);color:#cbd5e1}.res.info{background:rgba(245,158,11,.16);color:#fcd34d}
+.row.bad{background:rgba(239,68,68,.16);outline:2px solid rgba(239,68,68,.75)}
+#tl{position:absolute;left:48px;right:48px;top:800px;height:118px}
+#tl .lbl{color:var(--dim);font-size:14px;margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+#ov{position:absolute;inset:0;background:rgba(5,6,12,.72);display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+#card{width:1500px;background:#0c0f1d;border:2px solid #dc2626;border-radius:22px;padding:30px 36px;box-shadow:0 0 120px rgba(220,38,38,.35)}
+#card h3{margin:0 0 6px;color:#f87171;font-size:36px;letter-spacing:-.01em}#card .sub{color:var(--dim);font-size:18px;margin-bottom:18px}
+#card .exp{font-size:22px;line-height:1.5;color:#f1f5f9;margin-top:16px}
+#ok{position:absolute;left:50%;top:430px;transform:translateX(-50%);display:none;padding:26px 46px;border-radius:22px;background:rgba(6,40,22,.92);border:2px solid #16a34a;font-size:40px;font-weight:800;color:#4ade80;box-shadow:0 0 90px rgba(34,197,94,.3)}
+#ok small{display:block;font-size:19px;color:#a7f3d0;font-weight:500;margin-top:6px}
+</style></head><body>
+<div id="top"><h1>Nebula<span>Chaos</span></h1><div id="run"></div><span id="target" class="chip"></span><div id="clock">t = 0.00 s</div><div id="speed"></div></div>
+<svg id="cluster" viewBox="0 0 900 660"></svg>
+<div id="feed"><h2>Client operations — live</h2><div id="rows"></div></div>
+<div id="tl"><div class="lbl">Faults injected</div><svg id="tlsvg" width="1824" height="92"></svg></div>
+<div id="ov"><div id="card"></div></div>
+<div id="ok"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const FROM = +(q.get('from') || 0), TO = q.get('to') ? +q.get('to') : null, SPEED = +(q.get('speed') || 1);
+const FREEZE = +(q.get('freeze') || 9), LABEL = q.get('label') || '';
+const COL = {partition:'#f97316',delay:'#eab308',pause:'#a855f7',kill:'#ef4444',powerloss:'#dc2626','flip-log':'#ec4899','corrupt-snapshot':'#ec4899','snapshot-header':'#ec4899','delete-snapshot':'#ec4899',heal:'#22c55e',start:'#22c55e'};
+const opCol = o => o.s==='info'?'#f59e0b':o.s==='fail'?'#64748b':o.k==='read'?'#38bdf8':o.k==='write'?'#22c55e':'#a78bfa';
+const fmtOp = o => o.k==='read' ? `read(${o.key})` + (o.s==='ok' ? ` → ${o.f?o.v:'∅'}` : '') : o.k==='write' ? `write(${o.key}, ${o.v})` : `cas(${o.key}, ${o.x}→${o.v})`;
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+window.start = async function(data){
+  const D = data, END = TO ?? D.duration;
+  document.getElementById('run').innerHTML = `<b>${esc(D.name)}</b> · seed ${D.seed}${D.bugs?` · planted bug <b>${esc(D.bugs)}</b>`:''}`;
+  const tg = document.getElementById('target');
+  tg.textContent = LABEL || D.target; tg.className = 'chip ' + (/baseline|fix1|fix2/.test(D.target) || D.bugs ? 'base' : 'fixed');
+  // ---- cluster geometry
+  const ids = ['n1','n2','n3','n4','n5'], cx=450, cy=318, R=235, pos={};
+  ids.forEach((id,i)=>{const a=-Math.PI/2+i*2*Math.PI/5; pos[id]=[cx+R*Math.cos(a), cy+R*Math.sin(a)];});
+  const svg = document.getElementById('cluster'); const NS='http://www.w3.org/2000/svg';
+  const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;};
+  const links={};
+  for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const a=pos[ids[i]],b=pos[ids[j]];
+    links[ids[i]+ids[j]]={l:el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:'#2a3156','stroke-width':3}),
+      x:el('text',{x:(a[0]+b[0])/2,y:(a[1]+b[1])/2+9,'text-anchor':'middle','font-size':26,'font-weight':800,fill:'#ef4444',opacity:0},null)};
+    svg.appendChild(links[ids[i]+ids[j]].x); links[ids[i]+ids[j]].x.textContent='✕';}
+  const nodes={};
+  ids.forEach(id=>{const [x,y]=pos[id]; const g=el('g',{});
+    const glow=el('circle',{cx:x,cy:y,r:84,fill:'none',stroke:'#fbbf24','stroke-width':0,opacity:.9},g);
+    const pulse=el('circle',{cx:x,cy:y,r:66,fill:'none',stroke:'#22c55e','stroke-width':0},g);
+    const c=el('circle',{cx:x,cy:y,r:64,fill:'#141a33',stroke:'#4c5694','stroke-width':3},g);
+    const t=el('text',{x,y:y+11,'text-anchor':'middle','font-size':34,'font-weight':800,fill:'#e6e9f7'},g); t.textContent=id;
+    const role=el('text',{x,y:y+100,'text-anchor':'middle','font-size':19,'font-weight':600,fill:'#8b93b8'},g);
+    const st=el('text',{x,y:y-80,'text-anchor':'middle','font-size':17,'font-weight':800,fill:'#c084fc'},g);
+    nodes[id]={g,glow,pulse,c,t,role,st,lastPulse:-9};});
+  // ---- timeline strip
+  const tl=document.getElementById('tlsvg'); const W=1824, X=t=>8+(t/D.duration)*(W-16);
+  el('rect',{x:8,y:30,width:W-16,height:34,rx:8,fill:'#0d1120',stroke:'#1d2340'},tl);
+  // op density
+  const bins=new Array(240).fill(0); D.ops.forEach(o=>{if(o.s==='ok'){const b=Math.min(239,Math.floor(o.e/D.duration*240)); bins[b]++;}});
+  const mx=Math.max(...bins,1); bins.forEach((v,i)=>el('rect',{x:8+i*(W-16)/240,y:64-v/mx*30,width:(W-16)/240-1,height:v/mx*30,fill:'#38bdf8',opacity:.35},tl));
+  D.faults.forEach(f=>{if(['heal','start','resume'].includes(f.do))return; const e=Math.max(f.end,f.at+0.15);
+    el('rect',{x:X(f.at),y:26,width:Math.max(X(e)-X(f.at),4),height:42,rx:5,fill:COL[f.do]||'#888',opacity:.55},tl);
+    const tx=el('text',{x:X(f.at)+4,y:18,'font-size':14,'font-weight':700,fill:COL[f.do]||'#888'},tl); tx.textContent=f.do;});
+  if(D.anomaly){const bad=D.ops.filter(o=>o.bad); const t=Math.max(...bad.map(o=>o.s==='info'?o.i:o.e));
+    el('line',{x1:X(t),x2:X(t),y1:22,y2:72,stroke:'#ef4444','stroke-width':3},tl); const tx=el('text',{x:X(t)+6,y:88,'font-size':14,'font-weight':800,fill:'#ef4444'},tl); tx.textContent='⚠ '+D.anomaly.kind;}
+  const head=el('line',{x1:8,x2:8,y1:20,y2:76,stroke:'#fff','stroke-width':2},tl);
+  for(let s=0;s<=D.duration;s+=5){const tx=el('text',{x:X(s)-6,y:88,'font-size':12,fill:'#8b93b8'},tl); tx.textContent=s+'s';}
+  // ---- state helpers
+  const leaderAt=t=>{const st={};ids.forEach(i=>st[i]={role:'follower',term:0});for(const e of D.events){if(e.t>t)break; if(e.kind==='leader'){st[e.node]={role:'leader',term:e.term};} else if(e.kind==='follower'||e.kind==='boot'){st[e.node]={role:'follower',term:e.term||st[e.node].term};}}return st;};
+  const active=t=>D.faults.filter(f=>f.at<=t && (f.end>t || (f.end===f.at && t-f.at<0.6)));
+  const anomT = D.anomaly ? Math.max(...D.ops.filter(o=>o.bad).map(o=>o.s==='info'?o.i:o.e)) : null;
+  const rows=document.getElementById('rows'); let lastRow=-1, realLast=0;
+  const sorted=[...D.ops].sort((a,b)=>a.e-b.e); let ptr=0;
+  while(ptr<sorted.length && sorted[ptr].e<FROM) ptr++;
+  function addRow(o){const r=document.createElement('div'); r.className='row'+(o.bad?' bad':'');
+    r.innerHTML=`<span class="t">${o.e.toFixed(2)}s</span><span class="route">c${o.c} → ${o.n}</span><span style="color:${opCol(o)}">${esc(fmtOp(o))}</span><span class="res ${o.s}">${o.bad?'⚠ ':''}${o.s==='ok'?'ok':o.s==='fail'?'failed':'timed out'}</span>`;
+    rows.prepend(r); while(rows.children.length>17) rows.lastChild.remove();}
+  function render(t){
+    document.getElementById('clock').textContent='t = '+t.toFixed(2).padStart(5,'0')+' s';
+    head.setAttribute('x1',X(t)); head.setAttribute('x2',X(t));
+    const L=leaderAt(t), act=active(t);
+    const paused=new Set(), dead=new Set(), cut=new Set();
+    act.forEach(f=>{ if(f.do==='pause') f.nodes.forEach(n=>paused.add(n));
+      if(['kill','powerloss','flip-log','corrupt-snapshot','snapshot-header','delete-snapshot'].includes(f.do)) f.nodes.forEach(n=>dead.add(n));
+      if(f.do==='partition' && f.groups.length){const g={};f.groups.forEach((gr,i)=>gr.forEach(n=>g[n]=i));
+        for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const a=ids[i],b=ids[j]; if(g[a]!==g[b]) cut.add(a+b);}}});
+    for(const k in links){const c=cut.has(k); links[k].l.setAttribute('stroke',c?'#ef4444':'#2a3156'); links[k].l.setAttribute('stroke-dasharray',c?'10 10':''); links[k].l.setAttribute('opacity',c?.75:1); links[k].x.setAttribute('opacity',c?1:0);}
+    ids.forEach(id=>{const n=nodes[id], s=L[id]; const refused=D.refused[id] && t>=(D.faults.find(f=>f.nodes.includes(id)&&f.do==='flip-log')||{at:1e9}).at;
+      const isL=s.role==='leader' && !dead.has(id);
+      n.glow.setAttribute('stroke-width',isL?6:0);
+      n.c.setAttribute('stroke',isL?'#fbbf24':paused.has(id)?'#a855f7':'#4c5694');
+      n.c.setAttribute('fill',dead.has(id)||refused?'#0b0d18':'#141a33'); n.g.setAttribute('opacity',dead.has(id)||refused?.45:1);
+      n.role.textContent=refused?'refused to start':dead.has(id)?'crashed':isL?`★ leader · term ${s.term}`:'follower';
+      n.role.setAttribute('fill',isL?'#fbbf24':refused?'#f87171':'#8b93b8');
+      n.st.textContent=paused.has(id)?'SIGSTOP':dead.has(id)?'✕':'';
+      n.st.setAttribute('fill',paused.has(id)?'#c084fc':'#ef4444');
+      const age=t-n.lastPulse; n.pulse.setAttribute('stroke-width',age<0.12?6*(1-age/0.12):0); n.pulse.setAttribute('r',66+age*80);});
+    // The feed shows a readable sample (about 8 rows a second of video),
+    // and always the operations of the counterexample.
+    const nowReal=performance.now();
+    while(ptr<sorted.length && sorted[ptr].e<=t){const o=sorted[ptr++];
+      if(o.bad || (o.s!=='info' && nowReal-realLast>120)){ addRow(o); realLast=nowReal; }
+      nodes[o.n].lastPulse=t; nodes[o.n].pulse.setAttribute('stroke',opCol(o));}
+  }
+  function showAnomaly(){
+    const a=D.anomaly, bad=D.ops.filter(o=>a.ops.includes(o.id)).sort((x,y)=>x.i-y.i);
+    let lo=Math.min(...bad.map(o=>o.i)), hi=Math.max(...bad.map(o=>o.s==='info'?o.i:o.e)); const pad=Math.max((hi-lo)*0.08,0.02); lo-=pad; hi+=pad;
+    const w=1420, left=520, x=t=>left+(t-lo)/(hi-lo)*(w-left-30);
+    let s=`<svg width="${w}" height="${bad.length*62+30}" font-family="Inter">`;
+    bad.forEach((o,i)=>{const y=i*62+10, e=o.s==='info'?hi:o.e;
+      s+=`<text x="0" y="${y+30}" fill="#e6e9f7" font-size="22" font-family="JetBrains Mono">${esc(fmtOp(o))}</text><text x="0" y="${y+52}" fill="#8b93b8" font-size="15">client ${o.c} via ${o.n} · ${o.s==='ok'?(o.k==='read'?'returned':'acknowledged'):o.s==='fail'?'reported failed':'timed out'}</text>`;
+      s+=`<rect x="${x(o.i)}" y="${y+8}" width="${Math.max(x(e)-x(o.i),5)}" height="34" rx="7" fill="${opCol(o)}"/><text x="${x(o.i)}" y="${y+58}" fill="#8b93b8" font-size="14">${o.i.toFixed(3)}s → ${o.s==='info'?'…':o.e.toFixed(3)+'s'}</text>`;});
+    s+='</svg>';
+    const exp=a.explain[a.explain.length-1].replace(/ \[(ok|fail|info)\]/g,'');
+    document.getElementById('card').innerHTML=`<h3>⚠ ${esc(a.kind.toUpperCase())} — key ${esc(a.key)}</h3><div class="sub">Smallest failing history: ${bad.length} of ${D.ops_total.toLocaleString()} operations · found by the linearizability checker</div>${s}<div class="exp">${esc(exp)}</div>`;
+    document.getElementById('ov').style.display='flex';
+  }
+  // ---- play
+  let t=FROM, last=performance.now(), frozen=false;
+  return new Promise(res=>{
+    function frame(now){const dt=(now-last)/1000; last=now;
+      let sp=SPEED; if(anomT!==null && Math.abs(t-anomT)<0.6) sp=SPEED*0.15;
+      document.getElementById('speed').textContent= sp<SPEED ? 'slow motion' : (SPEED===1?'real time':`×${SPEED} speed`);
+      t=Math.min(END,t+dt*sp); render(t);
+      if(anomT!==null && !frozen && t>=anomT){frozen=true; showAnomaly(); setTimeout(()=>{res();},FREEZE*1000); return;}
+      if(t>=END){ if(D.valid){const ok=document.getElementById('ok'); ok.innerHTML=`✓ Linearizable<small>${D.ops_total.toLocaleString()} operations checked · ${D.faults.length} faults injected</small>`; ok.style.display='block'; setTimeout(res,FREEZE*1000);} else res(); return;}
+      requestAnimationFrame(frame);}
+    requestAnimationFrame(frame);});
+};
+</script></body></html>

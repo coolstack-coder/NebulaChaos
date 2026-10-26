@@ -1,0 +1,10 @@
+{
+  "name": "nebulachaos-video",
+  "private": true,
+  "type": "module",
+  "description": "Records the NebulaChaos demo video (Playwright + ffmpeg).",
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "playwright": "^1.49.1"
+  }
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>terminal</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1000px 600px at 30% 20%,rgba(124,58,237,.22),transparent 70%),#070912;font-family:"JetBrains Mono",Menlo,monospace}
+#win{position:absolute;left:110px;top:60px;width:1700px;height:820px;background:#0b0e1a;border:1px solid #232a4a;border-radius:16px;box-shadow:0 40px 120px rgba(0,0,0,.6);overflow:hidden}
+#bar{height:44px;background:#121731;display:flex;align-items:center;gap:9px;padding:0 18px;color:#8b93b8;font-size:15px}
+#bar i{width:13px;height:13px;border-radius:50%;display:inline-block}#bar span{margin-left:14px}
+#out{padding:20px 28px;font-size:21px;line-height:1.55;color:#d4d8ee;white-space:pre;height:740px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.p{color:#22d3ee}.c1{font-weight:700}.c31{color:#f87171}.c32{color:#4ade80}.c33{color:#fbbf24}.c2{color:#6b7394}
+.cur{display:inline-block;width:11px;height:24px;background:#a78bfa;vertical-align:-4px;animation:b 1s steps(1) infinite}@keyframes b{50%{opacity:0}}
+</style></head><body>
+<div id="win"><div id="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>anmol@macbook — NebulaChaos</span></div><div id="out"></div></div>
+<script>
+const out = document.getElementById('out');
+const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function ansi(s){ // minimal SGR → spans
+  let html='', open=0;
+  for (const part of s.split(/(\x1b\[[0-9;]*m)/)) {
+    const m = part.match(/^\x1b\[([0-9;]*)m$/);
+    if (!m) { html += esc(part); continue; }
+    while (open) { html += '</span>'; open--; }
+    for (const code of m[1].split(';')) if (code && code !== '0') { html += `<span class="c${code}">`; open++; }
+  }
+  while (open) { html += '</span>'; open--; }
+  return html;
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function line(html){ const d=document.createElement('div'); d.innerHTML=html||'&nbsp;'; out.appendChild(d); while(out.children.length>30) out.firstChild.remove(); return d; }
+// cast: {cmd, lines:[{t,s}]}; speed compresses the real timing, maxGap caps long waits
+window.play = async (cast, speed=1, maxGap=1.2) => {
+  const d = line('<span class="p">❯ </span>'); const cur = document.createElement('span'); cur.className='cur';
+  d.appendChild(cur);
+  for (const ch of cast.cmd) { cur.insertAdjacentText('beforebegin', ch); await sleep(28); }
+  await sleep(450); cur.remove();
+  let prev = 0;
+  for (const l of cast.lines) {
+    await sleep(Math.min((l.t - prev) / speed, maxGap) * 1000); prev = l.t;
+    line(ansi(l.s));
+  }
+  const tail = line('<span class="p">❯ </span>'); tail.appendChild(cur);
+};
+</script></body></html>
