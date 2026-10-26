@@ -17,6 +17,8 @@ import (
 	"github.com/coolstack-coder/nebulaos/internal/raft"
 	"github.com/coolstack-coder/nebulaos/internal/state"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // Overview is everything the dashboard needs in one document.
@@ -180,7 +182,14 @@ func (n *Node) submitHTTP(w http.ResponseWriter, r *http.Request, cmd state.Comm
 	ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
 	defer cancel()
 	if err := n.Submit(ctx, cmd); err != nil {
-		writeErr(w, http.StatusConflict, err)
+		code := http.StatusConflict // the state machine rejected the command
+		if errors.Is(err, raft.ErrTimeout) || errors.Is(err, context.DeadlineExceeded) || status.Code(err) == codes.Unavailable {
+			// We gave up waiting. The command may still commit, so this
+			// is not a definite failure: say so.
+			code = http.StatusServiceUnavailable
+			err = fmt.Errorf("outcome unknown: %w", err)
+		}
+		writeErr(w, code, err)
 		return
 	}
 	writeJSON(w, okCode, body)

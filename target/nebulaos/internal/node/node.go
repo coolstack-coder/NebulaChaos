@@ -8,6 +8,8 @@ package node
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -280,6 +282,12 @@ func (n *Node) Submit(ctx context.Context, cmd state.Command) error {
 	if cmd.Time == 0 {
 		cmd.Time = time.Now().UnixMilli()
 	}
+	if cmd.ReqID == "" {
+		// Assigned once, before the retry loop below: every retry of this
+		// request carries the same id, and the state machine applies it at
+		// most once even if an earlier attempt did commit.
+		cmd.ReqID = newReqID(n.cfg.ID)
+	}
 	data := cmd.Encode()
 	for {
 		if n.raft != nil && n.raft.IsLeader() {
@@ -326,6 +334,12 @@ func (n *Node) Submit(ctx context.Context, cmd state.Command) error {
 }
 
 const errNotLeaderMsg = "not leader"
+
+func newReqID(node string) string {
+	var b [12]byte
+	_, _ = rand.Read(b[:])
+	return node + "-" + hex.EncodeToString(b[:])
+}
 
 type clusterServer struct {
 	pb.UnimplementedClusterServer

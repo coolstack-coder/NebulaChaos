@@ -36,6 +36,9 @@ const (
 type Command struct {
 	Op   Op    `json:"op"`
 	Time int64 `json:"time"`
+	// ReqID identifies one client request across retries; the state
+	// machine applies each request at most once.
+	ReqID string `json:"req_id,omitempty"`
 
 	Node   *Node      `json:"node,omitempty"`
 	NodeID string     `json:"node_id,omitempty"`
@@ -99,6 +102,9 @@ type Snapshot struct {
 	EventSeq uint64              `json:"event_seq"`
 	Applied  uint64              `json:"applied_index"`
 	KV       map[string]string   `json:"kv,omitempty"`
+	// Results of recently applied requests, so a retried command is
+	// answered with the original outcome instead of being applied twice.
+	Requests *RequestTable `json:"requests,omitempty"`
 }
 
 func emptySnapshot() *Snapshot {
@@ -129,7 +135,13 @@ func (f *FSM) Apply(index uint64, data []byte) any {
 		return fmt.Errorf("decode command: %w", err)
 	}
 	f.mu.Lock()
-	err := f.apply(&c)
+	var err error
+	if prev, dup := f.s.Requests.Lookup(c.ReqID); dup {
+		err = prev
+	} else {
+		err = f.apply(&c)
+		f.s.Requests = f.s.Requests.Record(c.ReqID, err)
+	}
 	f.s.Applied = index
 	f.mu.Unlock()
 	if c.Op == OpReadBarrier {
@@ -173,6 +185,9 @@ func (f *FSM) View() *Snapshot {
 		EventSeq: f.s.EventSeq,
 		Applied:  f.s.Applied,
 		KV:       maps.Clone(f.s.KV),
+	}
+	if f.s.Requests != nil {
+		out.Requests = f.s.Requests.clone()
 	}
 	for k, v := range f.s.Nodes {
 		n := *v
