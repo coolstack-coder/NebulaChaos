@@ -59,10 +59,14 @@ func Check(ops []history.Op, budget int) Report {
 		go func() {
 			defer wg.Done()
 			kr := KeyReport{Key: k, Ops: len(by[k])}
-			res, _ := CheckKey(by[k], budget)
+			res, min := CheckKey(by[k], budget)
 			kr.Result = res.String()
 			if res == Violation {
-				kr.Minimal = Shrink(by[k], budget)
+				kr.Minimal = min
+				if kr.Minimal == nil {
+					kr.Minimal = Shrink(by[k], budget)
+				}
+				sort.Slice(kr.Minimal, func(i, j int) bool { return kr.Minimal[i].Invoke < kr.Minimal[j].Invoke })
 				kr.Anomaly, kr.Explain = Explain(kr.Minimal, by[k])
 			}
 			r.Keys[i] = kr
@@ -83,7 +87,7 @@ func Check(ops []history.Op, budget int) Report {
 			}
 		}
 	}
-	pres, _ := CheckPorcupine(ops, 60*time.Second)
+	pres, _ := CheckPorcupine(ops, 20*time.Second)
 	r.Porcupine = pres.String()
 	r.Agree = pres == ours || pres == Unknown || ours == Unknown
 	r.CheckTime = time.Since(start)
@@ -97,11 +101,26 @@ func Check(ops []history.Op, budget int) Report {
 // without it "read x=a" alone is the minimal (and useless) answer.
 func Shrink(ops []history.Op, budget int) []history.Op {
 	cur := prepare(ops)
+	if w := findWitness(cur); w != nil {
+		return w
+	}
+	if fast := dropUnobserved(cur); len(fast) < len(cur) {
+		if res, _ := search(fast, budget); res == Violation {
+			if m := shrinkPrepared(fast, budget); selfEvident(m) {
+				return m
+			}
+		}
+	}
+	return shrinkPrepared(cur, budget)
+}
+
+func shrinkPrepared(cur []history.Op, budget int) []history.Op {
+	full := cur
 	bad := func(c []history.Op) bool {
-		if !closed(c, cur) {
+		if !closed(c, full) {
 			return false
 		}
-		res, _ := CheckKey(c, budget)
+		res, _ := search(c, budget)
 		return res == Violation
 	}
 	if !bad(cur) {

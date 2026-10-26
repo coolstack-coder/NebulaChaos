@@ -76,6 +76,11 @@ func Run(ctx context.Context, o Options) (*Summary, error) {
 	if o.Settle == 0 {
 		o.Settle = 4 * time.Second
 	}
+	if o.Budget == 0 {
+		// Bounded search: a history too tangled to decide is reported as
+		// "unknown", never as a pass.
+		o.Budget = 3_000_000
+	}
 	if err := os.MkdirAll(o.Out, 0o755); err != nil {
 		return nil, err
 	}
@@ -144,7 +149,7 @@ func Run(ctx context.Context, o Options) (*Summary, error) {
 	rep := checker.Check(ops, o.Budget)
 	writeJSON(filepath.Join(o.Out, "check.json"), rep)
 	if !rep.Valid {
-		if _, info := checker.CheckPorcupine(ops, time.Minute); true {
+		if _, info := checker.CheckPorcupine(ops, 20*time.Second); true {
 			_ = checker.Visualize(filepath.Join(o.Out, "porcupine.html"), info)
 		}
 	}

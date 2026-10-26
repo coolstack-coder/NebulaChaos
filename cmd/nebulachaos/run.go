@@ -182,7 +182,7 @@ func cmdCheck(args []string) error {
 	if err != nil {
 		return err
 	}
-	rep := checker.Check(ops, 0)
+	rep := checker.Check(ops, 3_000_000)
 	for _, k := range rep.Keys {
 		fmt.Printf("%-6s %5d ops  %s\n", k.Key, k.Ops, k.Result)
 		if k.Anomaly != "" {

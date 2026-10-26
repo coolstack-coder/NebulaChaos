@@ -1,0 +1,21 @@
+name: leader-churn
+description: >
+  Kill whichever node is leader, every two seconds, for half a minute,
+  while 20 clients write through every node. Writes in flight on a dying
+  leader are the ones that get retried.
+duration: 32s
+events:
+  - {at: 2.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 4.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 6.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 8.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 10.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 12.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 14.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 16.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 18.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 20.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 22.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 24.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 26.0s, do: kill, target: leader, for: 1200ms}
+  - {at: 28.0s, do: kill, target: leader, for: 1200ms}
