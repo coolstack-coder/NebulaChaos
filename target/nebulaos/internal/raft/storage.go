@@ -1,13 +1,11 @@
 package raft
 
 import (
-	"bufio"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"hash/crc32"
-	"io"
 	"os"
 	"path/filepath"
 	"sync"
@@ -100,40 +98,66 @@ func (s *FileStorage) SaveState(term uint64, votedFor string) error {
 	return s.writeAtomic("state.json", b)
 }
 
+// ErrCorrupt reports damaged Raft storage. A node must not start on it: a
+// voter that silently forgets entries it acknowledged can help elect a
+// leader that never had them, and acknowledged writes disappear.
+var ErrCorrupt = errors.New("raft: storage corrupt")
+
+// maxRecord bounds a log record's length so a flipped length field can't
+// make recovery allocate gigabytes.
+const maxRecord = 64 << 20
+
+// decodeAt parses the record at off, returning it and its size on disk.
+func (s *FileStorage) decodeAt(b []byte, off int) (*pb.LogEntry, int, bool) {
+	if off+8 > len(b) {
+		return nil, 0, false
+	}
+	n := int(binary.LittleEndian.Uint32(b[off:]))
+	sum := binary.LittleEndian.Uint32(b[off+4:])
+	if n > maxRecord || off+8+n > len(b) {
+		return nil, 0, false
+	}
+	payload := b[off+8 : off+8+n]
+	if crc32.Checksum(payload, s.crcTb) != sum {
+		return nil, 0, false
+	}
+	e := &pb.LogEntry{}
+	if err := proto.Unmarshal(payload, e); err != nil {
+		return nil, 0, false
+	}
+	return e, 8 + n, true
+}
+
+// LoadLog reads every intact record. A crash can leave the final write
+// half-done; that torn tail is cut off, as before. But a bad record with
+// intact records after it is not a torn write, it is damage to data the
+// node had already fsynced and acknowledged, and recovery refuses to
+// continue instead of quietly dropping everything from that point on.
 func (s *FileStorage) LoadLog() ([]*pb.LogEntry, error) {
-	if _, err := s.logF.Seek(0, io.SeekStart); err != nil {
+	b, err := os.ReadFile(s.path("raft.log"))
+	if err != nil {
 		return nil, err
 	}
-	r := bufio.NewReader(s.logF)
-	var (
-		out  []*pb.LogEntry
-		good int64
-		hdr  [8]byte
-	)
-	for {
-		if _, err := io.ReadFull(r, hdr[:]); err != nil {
-			break // clean EOF or a torn header at the tail
-		}
-		n := binary.LittleEndian.Uint32(hdr[0:4])
-		sum := binary.LittleEndian.Uint32(hdr[4:8])
-		buf := make([]byte, n)
-		if _, err := io.ReadFull(r, buf); err != nil {
-			break
-		}
-		if crc32.Checksum(buf, s.crcTb) != sum {
-			break
-		}
-		e := &pb.LogEntry{}
-		if err := proto.Unmarshal(buf, e); err != nil {
+	var out []*pb.LogEntry
+	off := 0
+	for off < len(b) {
+		e, n, ok := s.decodeAt(b, off)
+		if !ok {
 			break
 		}
 		out = append(out, e)
-		good += int64(8 + n)
+		off += n
 	}
-	// Drop any torn write left over from a crash so later appends start at a
-	// record boundary.
-	if st, err := s.logF.Stat(); err == nil && st.Size() > good {
-		if err := s.logF.Truncate(good); err != nil {
+	if off < len(b) {
+		for p := off + 1; p+8 <= len(b); p++ {
+			if _, _, ok := s.decodeAt(b, p); ok {
+				return nil, fmt.Errorf("%w: raft.log is damaged at byte %d but holds intact records from byte %d on; "+
+					"refusing to start rather than silently dropping entries this node may have acknowledged", ErrCorrupt, off, p)
+			}
+		}
+		// Only a torn tail: drop it so later appends start at a record
+		// boundary.
+		if err := s.logF.Truncate(int64(off)); err != nil {
 			return nil, err
 		}
 	}
@@ -231,6 +255,12 @@ func (s *FileStorage) RewriteLog(entries []*pb.LogEntry) error {
 	return nil
 }
 
+// snapMagic marks the v2 snapshot format, whose checksum also covers the
+// index and term. In v1 only the data was checksummed, so a flipped bit in
+// the header was accepted: a snapshot claiming a huge term lets a node win
+// elections it should lose.
+var snapMagic = [4]byte{'N', 'S', 'N', '2'}
+
 func (s *FileStorage) LoadSnapshot() (uint64, uint64, []byte, error) {
 	b, err := os.ReadFile(s.path("snapshot.bin"))
 	if errors.Is(err, os.ErrNotExist) {
@@ -239,25 +269,36 @@ func (s *FileStorage) LoadSnapshot() (uint64, uint64, []byte, error) {
 	if err != nil {
 		return 0, 0, nil, err
 	}
+	if len(b) >= 24 && [4]byte(b[0:4]) == snapMagic {
+		sum := binary.LittleEndian.Uint32(b[20:24])
+		body := append(append([]byte{}, b[4:20]...), b[24:]...)
+		if crc32.Checksum(body, s.crcTb) != sum {
+			return 0, 0, nil, fmt.Errorf("%w: snapshot checksum mismatch", ErrCorrupt)
+		}
+		return binary.LittleEndian.Uint64(b[4:12]), binary.LittleEndian.Uint64(b[12:20]), b[24:], nil
+	}
+	// v1: [idx][term][crc(data)][data]
 	if len(b) < 20 {
-		return 0, 0, nil, errors.New("snapshot file truncated")
+		return 0, 0, nil, fmt.Errorf("%w: snapshot file truncated", ErrCorrupt)
 	}
 	idx := binary.LittleEndian.Uint64(b[0:8])
 	term := binary.LittleEndian.Uint64(b[8:16])
 	sum := binary.LittleEndian.Uint32(b[16:20])
 	data := b[20:]
 	if crc32.Checksum(data, s.crcTb) != sum {
-		return 0, 0, nil, errors.New("snapshot checksum mismatch")
+		return 0, 0, nil, fmt.Errorf("%w: snapshot checksum mismatch", ErrCorrupt)
 	}
 	return idx, term, data, nil
 }
 
 func (s *FileStorage) SaveSnapshot(index, term uint64, data []byte) error {
-	b := make([]byte, 20+len(data))
-	binary.LittleEndian.PutUint64(b[0:8], index)
-	binary.LittleEndian.PutUint64(b[8:16], term)
-	binary.LittleEndian.PutUint32(b[16:20], crc32.Checksum(data, s.crcTb))
-	copy(b[20:], data)
+	b := make([]byte, 24+len(data))
+	copy(b[0:4], snapMagic[:])
+	binary.LittleEndian.PutUint64(b[4:12], index)
+	binary.LittleEndian.PutUint64(b[12:20], term)
+	copy(b[24:], data)
+	body := append(append([]byte{}, b[4:20]...), data...)
+	binary.LittleEndian.PutUint32(b[20:24], crc32.Checksum(body, s.crcTb))
 	return s.writeAtomic("snapshot.bin", b)
 }
 
@@ -280,7 +321,19 @@ func (s *FileStorage) writeAtomic(name string, b []byte) error {
 	if err := f.Close(); err != nil {
 		return err
 	}
-	return os.Rename(tmp, s.path(name))
+	if err := os.Rename(tmp, s.path(name)); err != nil {
+		return err
+	}
+	if s.sync {
+		// The rename itself is only durable once the directory is.
+		d, err := os.Open(s.dir)
+		if err != nil {
+			return err
+		}
+		defer d.Close()
+		return d.Sync()
+	}
+	return nil
 }
 
 func (s *FileStorage) Close() error {

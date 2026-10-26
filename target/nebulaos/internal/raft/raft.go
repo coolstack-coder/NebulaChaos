@@ -15,6 +15,7 @@ package raft
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log/slog"
 	"math/rand/v2"
 	"sort"
@@ -219,8 +220,10 @@ func New(cfg Config) (*Node, error) {
 			continue
 		}
 		if e.Index != n.lastIndex()+1 {
-			n.log.Warn("gap in stored log, discarding tail", "want", n.lastIndex()+1, "got", e.Index)
-			break
+			// Entries that should be there are not: a lost snapshot, or a
+			// damaged log. Starting anyway would mean voting with a log that
+			// is missing committed entries.
+			return nil, fmt.Errorf("%w: log jumps from index %d to %d (snapshot at %d)", ErrCorrupt, n.lastIndex(), e.Index, snapIdx)
 		}
 		n.entries = append(n.entries, e)
 	}
@@ -859,7 +862,9 @@ func (n *Node) HandleAppendEntries(req *pb.AppendRequest) *pb.AppendResponse {
 
 	if req.LeaderCommit > n.commitIndex {
 		lastNew := prev + uint64(len(ents))
-		n.commitIndex = min(req.LeaderCommit, lastNew)
+		// A delayed AppendEntries can carry an old prefix; never move
+		// commitIndex backwards.
+		n.commitIndex = max(n.commitIndex, min(req.LeaderCommit, lastNew))
 		n.applyCond.Broadcast()
 	}
 	return &pb.AppendResponse{Term: n.term, Success: true, LastIndex: n.lastIndex()}
