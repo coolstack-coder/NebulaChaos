@@ -1,0 +1,1002 @@
+[
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 0,
+      "duration_s": 34.105562959,
+      "valid": true,
+      "unknown": false,
+      "ops": 7091,
+      "ok": 5906,
+      "fail": 1171,
+      "info": 14,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 2.000312709,
+          "write_stall_s": 0.660442291
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 2.600187209,
+          "write_stall_s": 0.660442291
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 6.000190917,
+          "write_stall_s": 0.659417458
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 6.500556125,
+          "write_stall_s": 0.6161495
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.00027425,
+          "write_stall_s": 0.6161495
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 10.700139209,
+          "write_stall_s": 0.611238458
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 14.000104042,
+          "write_stall_s": 0.611238458
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 14.5006345,
+          "write_stall_s": 0.5715955
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 18.000507459,
+          "write_stall_s": 0.728514333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 18.600003417,
+          "write_stall_s": 0.728514333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 22.000076167,
+          "write_stall_s": 0.728514333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 22.501435959,
+          "write_stall_s": 0.728514333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 26.000042959,
+          "write_stall_s": 0.728514333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 12,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed1-155928"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 0,
+      "duration_s": 34.061149958,
+      "valid": true,
+      "unknown": false,
+      "ops": 6722,
+      "ok": 5495,
+      "fail": 1214,
+      "info": 13,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 2.0000335,
+          "write_stall_s": 1.173708583
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 2.600237958,
+          "write_stall_s": 1.173708583
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 6.001051208,
+          "write_stall_s": 1.173708583
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 6.500374125,
+          "write_stall_s": 0.805308083
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 10.000077125,
+          "write_stall_s": 0.805308083
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.702044042,
+          "write_stall_s": 0.759235333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 14.000486167,
+          "write_stall_s": 0.759235333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 14.5004245,
+          "write_stall_s": 0.759235333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 18.000036083,
+          "write_stall_s": 0.759235333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.600836792,
+          "write_stall_s": 0.6777165
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.000231958,
+          "write_stall_s": 0.6777165
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.502052208,
+          "write_stall_s": 0.6777165
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 26.000156583,
+          "write_stall_s": 0.6777165
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 13,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed2-160003"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 0,
+      "duration_s": 34.091558541,
+      "valid": true,
+      "unknown": false,
+      "ops": 6917,
+      "ok": 5636,
+      "fail": 1270,
+      "info": 11,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.000111375,
+          "write_stall_s": 0.744698125
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.601985375,
+          "write_stall_s": 0.725634458
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 6.000296416,
+          "write_stall_s": 0.714374792
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 6.502078541,
+          "write_stall_s": 0.653257125
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 10.000163958,
+          "write_stall_s": 0.653257125
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.70065675,
+          "write_stall_s": 0.653257125
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 14.001205416,
+          "write_stall_s": 0.66192625
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 14.502052208,
+          "write_stall_s": 0.66192625
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.00065325,
+          "write_stall_s": 0.7285715
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 18.600333291,
+          "write_stall_s": 0.7285715
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 22.000167916,
+          "write_stall_s": 0.7285715
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 22.50196375,
+          "write_stall_s": 0.7285715
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 26.000156083,
+          "write_stall_s": 0.7285715
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 11,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed3-160038"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 0,
+      "duration_s": 34.061386625,
+      "valid": true,
+      "unknown": false,
+      "ops": 6751,
+      "ok": 5471,
+      "fail": 1256,
+      "info": 24,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 2.000441834,
+          "write_stall_s": 1.597569042
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.601584917,
+          "write_stall_s": 1.011575292
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 6.000055917,
+          "write_stall_s": 0.934350708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 6.500802584,
+          "write_stall_s": 0.934350708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 10.000567167,
+          "write_stall_s": 0.934350708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.700171667,
+          "write_stall_s": 0.934350708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 14.000450959,
+          "write_stall_s": 0.934350708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 14.500456875,
+          "write_stall_s": 0.699622708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 18.000197292,
+          "write_stall_s": 0.699622708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 18.602111667,
+          "write_stall_s": 0.647651625
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.000335084,
+          "write_stall_s": 0.647651625
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 22.500023667,
+          "write_stall_s": 0.647651625
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 26.000261084,
+          "write_stall_s": 0.647651625
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 13,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed4-160113"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 0,
+      "duration_s": 34.11154075,
+      "valid": true,
+      "unknown": false,
+      "ops": 7106,
+      "ok": 5803,
+      "fail": 1295,
+      "info": 8,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 2.000122917,
+          "write_stall_s": 0.577245125
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 2.600729,
+          "write_stall_s": 0.558120541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 6.001395792,
+          "write_stall_s": 0.558120541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 6.501333042,
+          "write_stall_s": 0.558120541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 10.000133167,
+          "write_stall_s": 0.558120541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.700500084,
+          "write_stall_s": 0.5464955
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 14.000305209,
+          "write_stall_s": 0.722589542
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 14.500613584,
+          "write_stall_s": 0.722589542
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 18.000451125,
+          "write_stall_s": 0.722589542
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 18.600173334,
+          "write_stall_s": 0.722589542
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 22.000237959,
+          "write_stall_s": 0.722589542
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 22.500500709,
+          "write_stall_s": 0.624559459
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 26.000230792,
+          "write_stall_s": 0.624559459
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 13,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed5-160147"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 0,
+      "duration_s": 34.074239125,
+      "valid": true,
+      "unknown": false,
+      "ops": 7038,
+      "ok": 5756,
+      "fail": 1278,
+      "info": 4,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 2.000606208,
+          "write_stall_s": 0.626176416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 2.600348208,
+          "write_stall_s": 0.626176416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 6.00004175,
+          "write_stall_s": 0.626176416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 6.502047208,
+          "write_stall_s": 0.626176416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.00007975,
+          "write_stall_s": 0.656079041
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.700294,
+          "write_stall_s": 0.656079041
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 14.000687708,
+          "write_stall_s": 0.884152333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 14.502066667,
+          "write_stall_s": 0.884152333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.000822708,
+          "write_stall_s": 0.884152333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.600280917,
+          "write_stall_s": 0.884152333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.001145167,
+          "write_stall_s": 0.884152333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 22.50021925,
+          "write_stall_s": 0.54242075
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 26.000077792,
+          "write_stall_s": 0.54242075
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 11,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed6-160222"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 0,
+      "duration_s": 34.102597125,
+      "valid": true,
+      "unknown": false,
+      "ops": 7123,
+      "ok": 5855,
+      "fail": 1256,
+      "info": 12,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.000630333,
+          "write_stall_s": 0.874761166
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 2.600076,
+          "write_stall_s": 0.874761166
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 6.000677417,
+          "write_stall_s": 0.874761166
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 6.501616375,
+          "write_stall_s": 0.713018
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 10.000238875,
+          "write_stall_s": 0.713018
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 10.700035292,
+          "write_stall_s": 0.713018
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 14.000282042,
+          "write_stall_s": 0.810654667
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 14.501847167,
+          "write_stall_s": 0.810654667
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 18.000346833,
+          "write_stall_s": 0.810654667
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 18.600053208,
+          "write_stall_s": 0.810654667
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 22.000080125,
+          "write_stall_s": 0.810654667
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.500356708,
+          "write_stall_s": 0.576044666
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 26.000081583,
+          "write_stall_s": 0.576044666
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed7-160257"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 0,
+      "duration_s": 34.039925708,
+      "valid": true,
+      "unknown": false,
+      "ops": 7151,
+      "ok": 5837,
+      "fail": 1300,
+      "info": 14,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 2.000099333,
+          "write_stall_s": 0.681156875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 2.600226,
+          "write_stall_s": 0.681156875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 6.00025425,
+          "write_stall_s": 0.681156875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 6.501170917,
+          "write_stall_s": 0.681156875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.000049458,
+          "write_stall_s": 0.718598375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.70014125,
+          "write_stall_s": 0.718598375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 14.000226375,
+          "write_stall_s": 0.718598375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 14.501071708,
+          "write_stall_s": 0.718598375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.000276083,
+          "write_stall_s": 0.768150875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 18.602085792,
+          "write_stall_s": 0.768150875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.000182958,
+          "write_stall_s": 0.768150875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 22.500967292,
+          "write_stall_s": 0.768150875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 26.000663292,
+          "write_stall_s": 0.768150875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 11,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed8-160332"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 0,
+      "duration_s": 34.052678834,
+      "valid": true,
+      "unknown": false,
+      "ops": 6666,
+      "ok": 5408,
+      "fail": 1228,
+      "info": 30,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 2.001900792,
+          "write_stall_s": 1.068259917
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 2.601004542,
+          "write_stall_s": 0.644821541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 6.0013615,
+          "write_stall_s": 1.333299416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 6.500809417,
+          "write_stall_s": 1.333299416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 10.000117417,
+          "write_stall_s": 1.333299416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 10.700140959,
+          "write_stall_s": 1.333299416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 14.000519084,
+          "write_stall_s": 1.333299416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 14.500562125,
+          "write_stall_s": 0.84678725
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.000728542,
+          "write_stall_s": 0.69133425
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 18.600999917,
+          "write_stall_s": 0.69133425
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.00141975,
+          "write_stall_s": 0.69133425
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 22.500722709,
+          "write_stall_s": 0.631259833
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 26.000418125,
+          "write_stall_s": 0.631259833
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 15,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed9-160407"
+    }
+  },
+  {
+    "profile": "crash-elections",
+    "summary": {
+      "name": "crash-elections",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 0,
+      "duration_s": 34.056843542,
+      "valid": true,
+      "unknown": false,
+      "ops": 7082,
+      "ok": 5780,
+      "fail": 1288,
+      "info": 14,
+      "faults": 13,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 2.000537958,
+          "write_stall_s": 0.69454125
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 2.600257417,
+          "write_stall_s": 0.683675084
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 6.000407542,
+          "write_stall_s": 0.683675084
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 6.500570333,
+          "write_stall_s": 0.683675084
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 10.000882917,
+          "write_stall_s": 0.683675084
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 10.700112125,
+          "write_stall_s": 0.557312041
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 14.000192917,
+          "write_stall_s": 0.708046209
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 14.500021292,
+          "write_stall_s": 0.708046209
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 18.000415375,
+          "write_stall_s": 0.708046209
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 18.600113167,
+          "write_stall_s": 0.708046209
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 22.000133042,
+          "write_stall_s": 0.708046209
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 22.500321625,
+          "write_stall_s": 0.628436375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 26.000267167,
+          "write_stall_s": 0.628436375
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 11,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-155928/nebulaos-fixed-crash-elections-seed10-160441"
+    }
+  }
+]

@@ -31,6 +31,8 @@ matrix stale-reads schedules/isolate-leader.yaml nebulaos-baseline nebulaos-fixe
 matrix bitrot schedules/bitrot-quorum.yaml nebulaos-fix1-readindex nebulaos-fixed --snapshot-every 1000000
 # 3. Double-applied commands: before vs after exactly-once requests.
 matrix duplicates schedules/crash-elections.yaml nebulaos-fix2-recovery nebulaos-fixed
+#    The race is narrow; leader churn with more clients gives it more chances.
+N=$((N + N / 2)) matrix churn schedules/leader-churn.yaml nebulaos-fix2-recovery nebulaos-fixed --clients 20
 
 # The checker must catch deliberately planted bugs.
 $NC zoo --target nebulaos-fixed --attempts 5

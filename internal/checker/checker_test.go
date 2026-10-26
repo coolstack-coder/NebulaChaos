@@ -8,8 +8,11 @@ import (
 	"github.com/coolstack-coder/nebulachaos/internal/history"
 )
 
+var nextID int
+
 func op(p int, kind history.Kind, val string, inv, comp int64) history.Op {
-	return history.Op{Process: p, Kind: kind, Key: "x", Value: val, Found: val != "", Invoke: inv, Complete: comp, Status: history.OK}
+	nextID++
+	return history.Op{ID: nextID, Process: p, Kind: kind, Key: "x", Value: val, Found: val != "", Invoke: inv, Complete: comp, Status: history.OK}
 }
 
 func TestStaleReadIsCaught(t *testing.T) {

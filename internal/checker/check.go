@@ -321,6 +321,29 @@ func Explain(min, all []history.Op) (string, []string) {
 			}
 		}
 	}
+	// A value written once was seen, then a different value was seen by an
+	// observer that started later, then the first value was seen again by
+	// one that started later still. Since the history is not linearizable,
+	// either an observer was stale or the write took effect twice.
+	for _, a := range min {
+		va, ok := observed(a)
+		if !ok || len(writers(va)) != 1 {
+			continue
+		}
+		for _, b := range min {
+			vb, ok := observed(b)
+			if !ok || vb == va || a.Complete >= b.Invoke {
+				continue
+			}
+			for _, c := range min {
+				if vc, ok := observed(c); ok && vc == va && b.Invoke < c.Invoke && c.ID != a.ID {
+					return "value reappeared", append(lines, fmt.Sprintf(
+						"%q was written once, by %s. It was seen (done at %s), then %q was seen by an operation that started later (%s), then %q was seen again starting at %s. A value written once cannot come back: either a read was served stale data or the write took effect twice.",
+						va, writers(va)[0].String(), secs(a.Complete), vb, secs(b.Invoke), va, secs(c.Invoke)))
+				}
+			}
+		}
+	}
 	// Two successful CAS from the same expected value: both cannot have
 	// seen it.
 	for i, a := range min {

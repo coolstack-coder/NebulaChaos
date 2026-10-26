@@ -143,15 +143,29 @@ func findWitness(ops []history.Op) []history.Op {
 			if found {
 				out = append(out, wv)
 			}
-			// A CAS used as the overwrite observed a value too; keep its
-			// writer so the counterexample stays closed and explainable.
-			if we, ok := writer[w.Expect]; w.Kind == history.CAS && ok {
-				out = append(out, we)
-			}
-			return out
+			return closeOver(out, writer)
 		}
 	}
 	return nil
+}
+
+// closeOver adds the writer of every value an op in ops observed (a
+// successful CAS observes the value it expected), repeatedly, so the
+// counterexample stays closed and explainable.
+func closeOver(ops []history.Op, writer map[string]history.Op) []history.Op {
+	in := map[int]bool{}
+	for _, o := range ops {
+		in[o.ID] = true
+	}
+	for i := 0; i < len(ops); i++ {
+		if v, ok := observed(ops[i]); ok {
+			if w, ok := writer[v]; ok && !in[w.ID] {
+				in[w.ID] = true
+				ops = append(ops, w)
+			}
+		}
+	}
+	return ops
 }
 
 // selfEvident reports whether a non-linearizable sub-history stays

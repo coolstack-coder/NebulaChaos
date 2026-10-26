@@ -1,0 +1,492 @@
+[
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 0,
+      "duration_s": 26.070122292,
+      "valid": true,
+      "unknown": false,
+      "ops": 4830,
+      "ok": 3806,
+      "fail": 906,
+      "info": 118,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000267084,
+          "write_stall_s": 0.892200166
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000045875,
+          "write_stall_s": 7.847937167
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.007377959,
+          "write_stall_s": 7.840605083
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 980/1076 of raft.log (byte 121529), restart",
+          "at_s": 8.100048584,
+          "write_stall_s": 7.747934458
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 182,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed1-154912"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 0,
+      "duration_s": 26.04770675,
+      "valid": true,
+      "unknown": false,
+      "ops": 4644,
+      "ok": 3648,
+      "fail": 875,
+      "info": 121,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000087125,
+          "write_stall_s": 0.99982425
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000389709,
+          "write_stall_s": 8.021768
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.004832709,
+          "write_stall_s": 8.017325
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 680/1076 of raft.log (byte 84043), restart",
+          "at_s": 8.100763667,
+          "write_stall_s": 7.921394042
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 27,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed2-154939"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 0,
+      "duration_s": 26.062319083,
+      "valid": true,
+      "unknown": false,
+      "ops": 4914,
+      "ok": 3868,
+      "fail": 931,
+      "info": 115,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000501333,
+          "write_stall_s": 0.215023875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.001176,
+          "write_stall_s": 7.679067583
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.005354875,
+          "write_stall_s": 7.674888708
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 1044/1130 of raft.log (byte 129087), restart",
+          "at_s": 8.100155458,
+          "write_stall_s": 7.580088125
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 159,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed3-155006"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 0,
+      "duration_s": 26.0709725,
+      "valid": true,
+      "unknown": false,
+      "ops": 4748,
+      "ok": 3745,
+      "fail": 884,
+      "info": 119,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.00029,
+          "write_stall_s": 0.942309667
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000168708,
+          "write_stall_s": 7.833504959
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.006257917,
+          "write_stall_s": 7.82741575
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 40/1113 of raft.log (byte 5806), restart",
+          "at_s": 8.10010175,
+          "write_stall_s": 7.733571917
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed4-155033"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 0,
+      "duration_s": 26.058083792,
+      "valid": true,
+      "unknown": false,
+      "ops": 4735,
+      "ok": 3701,
+      "fail": 914,
+      "info": 120,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000383125,
+          "write_stall_s": 0.905754875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.00029825,
+          "write_stall_s": 7.785566334
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.00162,
+          "write_stall_s": 7.784244584
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 45/1030 of raft.log (byte 6058), restart",
+          "at_s": 8.100400417,
+          "write_stall_s": 7.685464167
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 178,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed5-155059"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 0,
+      "duration_s": 26.056431833,
+      "valid": true,
+      "unknown": false,
+      "ops": 4700,
+      "ok": 3660,
+      "fail": 921,
+      "info": 119,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.0000555,
+          "write_stall_s": 0.316123041
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.00006625,
+          "write_stall_s": 7.73154025
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.002753083,
+          "write_stall_s": 7.728853417
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 650/1033 of raft.log (byte 80235), restart",
+          "at_s": 8.102054167,
+          "write_stall_s": 7.629552333
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed6-155126"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 0,
+      "duration_s": 26.041942875,
+      "valid": true,
+      "unknown": false,
+      "ops": 4943,
+      "ok": 3919,
+      "fail": 902,
+      "info": 122,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.00117775,
+          "write_stall_s": 0.982319333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000092042,
+          "write_stall_s": 7.654255666
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.003524458,
+          "write_stall_s": 7.65082325
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 373/1012 of raft.log (byte 46234), restart",
+          "at_s": 8.100498917,
+          "write_stall_s": 7.553848791
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed7-155153"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 0,
+      "duration_s": 26.052459209,
+      "valid": true,
+      "unknown": false,
+      "ops": 4762,
+      "ok": 3758,
+      "fail": 883,
+      "info": 121,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.0009505,
+          "write_stall_s": 0.837005208
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000065292,
+          "write_stall_s": 7.627219083
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.00294275,
+          "write_stall_s": 7.624341625
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 313/1013 of raft.log (byte 38930), restart",
+          "at_s": 8.100268125,
+          "write_stall_s": 7.52701625
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed8-155219"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 0,
+      "duration_s": 26.033535167,
+      "valid": true,
+      "unknown": false,
+      "ops": 4807,
+      "ok": 3761,
+      "fail": 928,
+      "info": 118,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000192417,
+          "write_stall_s": 0.316443709
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.001164834,
+          "write_stall_s": 7.830488416
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.00504425,
+          "write_stall_s": 7.826609
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 593/1097 of raft.log (byte 73399), restart",
+          "at_s": 8.100503042,
+          "write_stall_s": 7.731150208
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 72,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed9-155246"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 0,
+      "duration_s": 26.070020667,
+      "valid": true,
+      "unknown": false,
+      "ops": 4879,
+      "ok": 3851,
+      "fail": 916,
+      "info": 112,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000122458,
+          "write_stall_s": 0.752013209
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.0003645,
+          "write_stall_s": 7.609381083
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.004478167,
+          "write_stall_s": 7.605267416
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 1030/1139 of raft.log (byte 127604), restart",
+          "at_s": 8.101125708,
+          "write_stall_s": 7.508619875
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 10,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154912/nebulaos-fixed-bitrot-quorum-seed10-155313"
+    }
+  }
+]

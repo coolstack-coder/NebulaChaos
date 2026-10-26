@@ -1,0 +1,342 @@
+[
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 0,
+      "duration_s": 24.076492542,
+      "valid": true,
+      "unknown": false,
+      "ops": 4425,
+      "ok": 3717,
+      "fail": 656,
+      "info": 52,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4 n5] | [n1 n3 n2]",
+          "at_s": 3.000015667,
+          "write_stall_s": 0.986952792
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3 n4] | [n2 n1 n5]",
+          "at_s": 10.000113375,
+          "write_stall_s": 0.632390875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed1-154024"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 0,
+      "duration_s": 24.055328542,
+      "valid": true,
+      "unknown": false,
+      "ops": 4301,
+      "ok": 3589,
+      "fail": 658,
+      "info": 54,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4 n3] | [n2 n5 n1]",
+          "at_s": 3.000582417,
+          "write_stall_s": 1.022434958
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2 n3] | [n5 n1 n4]",
+          "at_s": 10.000130209,
+          "write_stall_s": 1.022434958
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed2-154049"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 0,
+      "duration_s": 24.057790459,
+      "valid": true,
+      "unknown": false,
+      "ops": 4439,
+      "ok": 3741,
+      "fail": 641,
+      "info": 57,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5 n2] | [n4 n1 n3]",
+          "at_s": 3.00009575,
+          "write_stall_s": 1.002882333
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1 n3] | [n4 n2 n5]",
+          "at_s": 10.000243,
+          "write_stall_s": 1.002882333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed3-154113"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 0,
+      "duration_s": 24.050349292,
+      "valid": true,
+      "unknown": false,
+      "ops": 4175,
+      "ok": 3479,
+      "fail": 625,
+      "info": 71,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1 n2] | [n4 n5 n3]",
+          "at_s": 3.001118375,
+          "write_stall_s": 1.028572833
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4 n3] | [n5 n2 n1]",
+          "at_s": 10.000316459,
+          "write_stall_s": 1.028572833
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 4,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed4-154138"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 0,
+      "duration_s": 24.103551292,
+      "valid": true,
+      "unknown": false,
+      "ops": 3921,
+      "ok": 3245,
+      "fail": 618,
+      "info": 58,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2 n3] | [n5 n4 n1]",
+          "at_s": 3.000914,
+          "write_stall_s": 1.002568791
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5 n4] | [n2 n3 n1]",
+          "at_s": 10.000342625,
+          "write_stall_s": 0.992593375
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed5-154203"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 0,
+      "duration_s": 24.048088916,
+      "valid": true,
+      "unknown": false,
+      "ops": 4248,
+      "ok": 3596,
+      "fail": 590,
+      "info": 62,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3 n4] | [n5 n1 n2]",
+          "at_s": 3.000517791,
+          "write_stall_s": 0.670314542
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1 n2] | [n5 n3 n4]",
+          "at_s": 10.000244208,
+          "write_stall_s": 0.670314542
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed6-154227"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 0,
+      "duration_s": 24.061496625,
+      "valid": true,
+      "unknown": false,
+      "ops": 4274,
+      "ok": 3635,
+      "fail": 581,
+      "info": 58,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2 n3] | [n4 n5 n1]",
+          "at_s": 3.000251791,
+          "write_stall_s": 1.019980916
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4 n3] | [n5 n1 n2]",
+          "at_s": 10.000376875,
+          "write_stall_s": 0.599849208
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed7-154252"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 0,
+      "duration_s": 24.055985167,
+      "valid": true,
+      "unknown": false,
+      "ops": 4075,
+      "ok": 3450,
+      "fail": 566,
+      "info": 59,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3 n2] | [n4 n1 n5]",
+          "at_s": 3.000470334,
+          "write_stall_s": 0.982265416
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1 n4] | [n3 n5 n2]",
+          "at_s": 10.000070917,
+          "write_stall_s": 0.982265416
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 4,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed8-154317"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 0,
+      "duration_s": 24.052589792,
+      "valid": true,
+      "unknown": false,
+      "ops": 4461,
+      "ok": 3706,
+      "fail": 698,
+      "info": 57,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3 n5] | [n4 n2 n1]",
+          "at_s": 3.000579084,
+          "write_stall_s": 1.0108555
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4 n1] | [n5 n2 n3]",
+          "at_s": 10.000943209,
+          "write_stall_s": 0.938878834
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed9-154342"
+    }
+  },
+  {
+    "profile": "isolate-leader",
+    "summary": {
+      "name": "isolate-leader",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 0,
+      "duration_s": 24.0730065,
+      "valid": true,
+      "unknown": false,
+      "ops": 4533,
+      "ok": 3780,
+      "fail": 697,
+      "info": 56,
+      "faults": 2,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5 n4] | [n2 n1 n3]",
+          "at_s": 3.000015958,
+          "write_stall_s": 1.0091065
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3 n2] | [n4 n1 n5]",
+          "at_s": 10.001534375,
+          "write_stall_s": 1.0091065
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-154024/nebulaos-fixed-isolate-leader-seed10-154406"
+    }
+  }
+]

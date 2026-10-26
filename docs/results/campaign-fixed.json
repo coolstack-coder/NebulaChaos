@@ -1,0 +1,3062 @@
+[
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-1",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 1793014222901,
+      "duration_s": 24.059481084,
+      "valid": true,
+      "unknown": false,
+      "ops": 4553,
+      "ok": 3878,
+      "fail": 630,
+      "info": 45,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n5] | [n4 n1 n3 n2]",
+          "at_s": 2.096095042,
+          "write_stall_s": 0.136463042
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n2 n1] \u003c- n3 -\u003e [n5 n4]",
+          "at_s": 6.325023125,
+          "write_stall_s": 0.084821208
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n5 n1] \u003c- n3 -\u003e [n4 n2]",
+          "at_s": 10.443537167,
+          "write_stall_s": 0.18508675
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n1 n5 n4 n3 n2",
+          "at_s": 15.131051084,
+          "write_stall_s": 0.18508675
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-1-seed1-170022"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-2",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 1793014247611,
+      "duration_s": 24.062474916,
+      "valid": true,
+      "unknown": false,
+      "ops": 4067,
+      "ok": 3388,
+      "fail": 619,
+      "info": 60,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3] | [n4 n2 n5 n1]",
+          "at_s": 1.996067791,
+          "write_stall_s": 0.978900166
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1] | [n3 n2 n5 n4]",
+          "at_s": 8.7724175,
+          "write_stall_s": 0.987547125
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2] | [n4 n5 n1 n3]",
+          "at_s": 13.79373825,
+          "write_stall_s": 0.987547125
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-2-seed2-170046"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-3",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 1793014272397,
+      "duration_s": 24.038258042,
+      "valid": true,
+      "unknown": false,
+      "ops": 3853,
+      "ok": 3245,
+      "fail": 528,
+      "info": 80,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3] | [n2 n4 n1 n5]",
+          "at_s": 1.6222245,
+          "write_stall_s": 0.90093625
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n3 n4] \u003c- n2 -\u003e [n1 n5]",
+          "at_s": 7.552110833,
+          "write_stall_s": 0.653665459
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4] | [n3 n5 n2 n1]",
+          "at_s": 12.537042167,
+          "write_stall_s": 0.984314041
+        },
+        {
+          "fault": "partition",
+          "detail": "[n1 n3] | [n5 n4 n2]",
+          "at_s": 16.639099,
+          "write_stall_s": 0.963371208
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-3-seed3-170111"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-4",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 1793014297055,
+      "duration_s": 24.045241666,
+      "valid": true,
+      "unknown": false,
+      "ops": 3827,
+      "ok": 3205,
+      "fail": 535,
+      "info": 87,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5 n2] | [n1 n4 n3]",
+          "at_s": 1.837436041,
+          "write_stall_s": 1.025546167
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3] | [n4 n5 n2 n1]",
+          "at_s": 7.83210825,
+          "write_stall_s": 0.776579333
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4] | [n2 n5 n1 n3]",
+          "at_s": 12.609098291,
+          "write_stall_s": 0.776579333
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n2 n4 n5 n1 n3",
+          "at_s": 15.870680583,
+          "write_stall_s": 0.176560959
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 13,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-4-seed4-170136"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-5",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 1793014321785,
+      "duration_s": 24.115241417,
+      "valid": true,
+      "unknown": false,
+      "ops": 4037,
+      "ok": 3333,
+      "fail": 640,
+      "info": 64,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1 n3] | [n5 n4 n2]",
+          "at_s": 1.795119459,
+          "write_stall_s": 1.000114542
+        },
+        {
+          "fault": "partition",
+          "detail": "[n4] | [n2 n3 n5 n1]",
+          "at_s": 7.420152,
+          "write_stall_s": 0.973877209
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2] | [n1 n4 n3 n5]",
+          "at_s": 11.784364584,
+          "write_stall_s": 0.636037875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 4,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-5-seed5-170201"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-6",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 1793014346525,
+      "duration_s": 24.054583875,
+      "valid": true,
+      "unknown": false,
+      "ops": 3976,
+      "ok": 3337,
+      "fail": 574,
+      "info": 65,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "majorities ring n3 n4 n5 n1 n2",
+          "at_s": 2.196624333,
+          "write_stall_s": 3.055052125
+        },
+        {
+          "fault": "delay",
+          "detail": "+257ms on every link",
+          "at_s": 7.467561583,
+          "write_stall_s": 3.055052125
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1] | [n2 n5 n3 n4]",
+          "at_s": 12.7151735,
+          "write_stall_s": 1.010494041
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 4,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-6-seed6-170225"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-7",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 1793014371288,
+      "duration_s": 24.12865725,
+      "valid": true,
+      "unknown": false,
+      "ops": 3881,
+      "ok": 3272,
+      "fail": 556,
+      "info": 53,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "bridge: [n3 n2] \u003c- n4 -\u003e [n5 n1]",
+          "at_s": 2.29919625,
+          "write_stall_s": 3.762332875
+        },
+        {
+          "fault": "delay",
+          "detail": "+363ms on every link",
+          "at_s": 7.47403425,
+          "write_stall_s": 3.749365875
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n3 n5] \u003c- n4 -\u003e [n1 n2]",
+          "at_s": 12.46714625,
+          "write_stall_s": 0.093038416
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-7-seed7-170250"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-8",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 1793014396011,
+      "duration_s": 24.070579041,
+      "valid": true,
+      "unknown": false,
+      "ops": 3947,
+      "ok": 3340,
+      "fail": 539,
+      "info": 68,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4] | [n2 n3 n1 n5]",
+          "at_s": 2.41012225,
+          "write_stall_s": 1.027992792
+        },
+        {
+          "fault": "delay",
+          "detail": "+117ms on every link",
+          "at_s": 5.952133916,
+          "write_stall_s": 0.591671584
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n4 n3 n1 n5 n2",
+          "at_s": 8.517349583,
+          "write_stall_s": 0.600546875
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3 n5] | [n2 n4 n1]",
+          "at_s": 15.551086291,
+          "write_stall_s": 0.600546875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-8-seed8-170315"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-9",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 1793014420683,
+      "duration_s": 24.081470209,
+      "valid": true,
+      "unknown": false,
+      "ops": 4079,
+      "ok": 3390,
+      "fail": 628,
+      "info": 61,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4 n5] | [n3 n2 n1]",
+          "at_s": 2.475598042,
+          "write_stall_s": 0.680434834
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n1 n5 n2 n4 n3",
+          "at_s": 7.89417875,
+          "write_stall_s": 0.351050333
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n1 n4] \u003c- n3 -\u003e [n2 n5]",
+          "at_s": 13.65608975,
+          "write_stall_s": 0.120169208
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 13,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-9-seed9-170340"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-10",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 1793014445374,
+      "duration_s": 24.1222345,
+      "valid": true,
+      "unknown": false,
+      "ops": 4194,
+      "ok": 3499,
+      "fail": 628,
+      "info": 67,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5] | [n4 n2 n1 n3]",
+          "at_s": 2.429042541,
+          "write_stall_s": 1.009402583
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n2 n3] \u003c- n4 -\u003e [n1 n5]",
+          "at_s": 5.565278041,
+          "write_stall_s": 1.032762333
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n3 cut off: [n3] | [n4 n5 n1 n2]",
+          "at_s": 11.8236295,
+          "write_stall_s": 1.032762333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-10-seed10-170404"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-11",
+      "target": "nebulaos-fixed",
+      "seed": 11,
+      "start_unix_ms": 1793014470114,
+      "duration_s": 24.054898625,
+      "valid": true,
+      "unknown": false,
+      "ops": 3958,
+      "ok": 3317,
+      "fail": 569,
+      "info": 72,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1] | [n2 n4 n5 n3]",
+          "at_s": 2.4023065,
+          "write_stall_s": 0.19577
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n1 n2] \u003c- n4 -\u003e [n5 n3]",
+          "at_s": 6.910412667,
+          "write_stall_s": 0.205781292
+        },
+        {
+          "fault": "partition",
+          "detail": "[n4 n5] | [n2 n3 n1]",
+          "at_s": 12.805152334,
+          "write_stall_s": 0.372847875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-11-seed11-170429"
+    }
+  },
+  {
+    "profile": "partitions",
+    "summary": {
+      "name": "partitions-12",
+      "target": "nebulaos-fixed",
+      "seed": 12,
+      "start_unix_ms": 1793014494830,
+      "duration_s": 24.0530285,
+      "valid": true,
+      "unknown": false,
+      "ops": 3544,
+      "ok": 2960,
+      "fail": 552,
+      "info": 32,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "delay",
+          "detail": "+60ms on every link",
+          "at_s": 1.847947375,
+          "write_stall_s": 0.631941792
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2 n3] | [n5 n4 n1]",
+          "at_s": 8.331212542,
+          "write_stall_s": 0.631941792
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n5 n3] \u003c- n1 -\u003e [n2 n4]",
+          "at_s": 11.748204458,
+          "write_stall_s": 0.19792575
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-partitions-12-seed12-170454"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-1",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 1793014519547,
+      "duration_s": 24.181073458,
+      "valid": true,
+      "unknown": false,
+      "ops": 4340,
+      "ok": 3659,
+      "fail": 639,
+      "info": 42,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 2.096288,
+          "write_stall_s": 1.011391042
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 6.325376458,
+          "write_stall_s": 1.000280042
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 10.4440035,
+          "write_stall_s": 0.135096
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 15.13138025,
+          "write_stall_s": 0.135096
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-1-seed1-170518"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-2",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 1793014544391,
+      "duration_s": 24.07865675,
+      "valid": true,
+      "unknown": false,
+      "ops": 4468,
+      "ok": 3724,
+      "fail": 692,
+      "info": 52,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 1.996652792,
+          "write_stall_s": 0.974485625
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 8.772347959,
+          "write_stall_s": 0.974485625
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 13.793218084,
+          "write_stall_s": 0.085025667
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-2-seed2-170543"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-3",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 1793014569158,
+      "duration_s": 24.133573,
+      "valid": true,
+      "unknown": false,
+      "ops": 3990,
+      "ok": 3331,
+      "fail": 591,
+      "info": 68,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 1.621550667,
+          "write_stall_s": 1.060122334
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 7.552234083,
+          "write_stall_s": 1.060122334
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 12.53714475,
+          "write_stall_s": 1.075927417
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 16.639118875,
+          "write_stall_s": 1.075927417
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-3-seed3-170608"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-4",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 1793014593948,
+      "duration_s": 24.101834292,
+      "valid": true,
+      "unknown": false,
+      "ops": 4145,
+      "ok": 3476,
+      "fail": 611,
+      "info": 58,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 1.83826575,
+          "write_stall_s": 1.006886834
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 7.832166625,
+          "write_stall_s": 0.884352667
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 12.609882167,
+          "write_stall_s": 0.884352667
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 15.870825292,
+          "write_stall_s": 0.10328875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-4-seed4-170633"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-5",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 1793014618713,
+      "duration_s": 24.147437834,
+      "valid": true,
+      "unknown": false,
+      "ops": 4243,
+      "ok": 3508,
+      "fail": 683,
+      "info": 52,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 1.795077792,
+          "write_stall_s": 1.01927825
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 7.419166209,
+          "write_stall_s": 0.964552917
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 11.784055125,
+          "write_stall_s": 0.964552917
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-5-seed5-170658"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-6",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 1793014643550,
+      "duration_s": 24.052107083,
+      "valid": true,
+      "unknown": false,
+      "ops": 4314,
+      "ok": 3629,
+      "fail": 630,
+      "info": 55,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 2.196481916,
+          "write_stall_s": 1.041491709
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 7.467128625,
+          "write_stall_s": 0.125967333
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 12.842819625,
+          "write_stall_s": 0.105316667
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 16.432286541,
+          "write_stall_s": 0.105316667
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-6-seed6-170722"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-7",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 1793014668271,
+      "duration_s": 24.082596041,
+      "valid": true,
+      "unknown": false,
+      "ops": 4505,
+      "ok": 3788,
+      "fail": 674,
+      "info": 43,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 2.299100541,
+          "write_stall_s": 0.755532459
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 7.474034083,
+          "write_stall_s": 0.967883708
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 13.7749945,
+          "write_stall_s": 0.952883916
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 10,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-7-seed7-170747"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-8",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 1793014692949,
+      "duration_s": 24.044351083,
+      "valid": true,
+      "unknown": false,
+      "ops": 4232,
+      "ok": 3572,
+      "fail": 619,
+      "info": 41,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n2",
+          "at_s": 2.4100355,
+          "write_stall_s": 1.007542667
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 5.951037125,
+          "write_stall_s": 0.735374541
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 8.840531208,
+          "write_stall_s": 0.735374541
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 14.524211708,
+          "write_stall_s": 0.735374541
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-8-seed8-170812"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-9",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 1793014717654,
+      "duration_s": 24.070208417,
+      "valid": true,
+      "unknown": false,
+      "ops": 4231,
+      "ok": 3521,
+      "fail": 647,
+      "info": 63,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 2.474058667,
+          "write_stall_s": 1.017525625
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n2",
+          "at_s": 7.894039458,
+          "write_stall_s": 1.017525625
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 13.656027917,
+          "write_stall_s": 0.123413583
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-9-seed9-170837"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-10",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 1793014742503,
+      "duration_s": 24.09977025,
+      "valid": true,
+      "unknown": false,
+      "ops": 4553,
+      "ok": 3805,
+      "fail": 704,
+      "info": 44,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 2.430048375,
+          "write_stall_s": 0.084495916
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n2",
+          "at_s": 5.565458334,
+          "write_stall_s": 0.889873292
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 11.823121959,
+          "write_stall_s": 0.889873292
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 39,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-10-seed10-170901"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-11",
+      "target": "nebulaos-fixed",
+      "seed": 11,
+      "start_unix_ms": 1793014767325,
+      "duration_s": 24.116494625,
+      "valid": true,
+      "unknown": false,
+      "ops": 4175,
+      "ok": 3516,
+      "fail": 605,
+      "info": 54,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n2",
+          "at_s": 2.402225,
+          "write_stall_s": 0.08767375
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 6.910518917,
+          "write_stall_s": 0.970038042
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 12.805597833,
+          "write_stall_s": 0.970038042
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-11-seed11-170926"
+    }
+  },
+  {
+    "profile": "pauses",
+    "summary": {
+      "name": "pauses-12",
+      "target": "nebulaos-fixed",
+      "seed": 12,
+      "start_unix_ms": 1793014792088,
+      "duration_s": 24.080089667,
+      "valid": true,
+      "unknown": false,
+      "ops": 4146,
+      "ok": 3489,
+      "fail": 592,
+      "info": 65,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 1.811378417,
+          "write_stall_s": 0.992601625
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 6.971060375,
+          "write_stall_s": 0.983815583
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n2",
+          "at_s": 9.5452285,
+          "write_stall_s": 0.803330875
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 15.782415709,
+          "write_stall_s": 0.586392333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-pauses-12-seed12-170951"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-1",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 1793014816843,
+      "duration_s": 24.100559292,
+      "valid": true,
+      "unknown": false,
+      "ops": 5027,
+      "ok": 4198,
+      "fail": 825,
+      "info": 4,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 2.096556917,
+          "write_stall_s": 0.732713875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 3260 → 2938 bytes (2904 fsynced)",
+          "at_s": 6.326386792,
+          "write_stall_s": 0.6486265
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 1112 → 1083 bytes (980 fsynced)",
+          "at_s": 7.64121875,
+          "write_stall_s": 0.100941084
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 10.586174917,
+          "write_stall_s": 0.100941084
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 5441 → 5268 bytes (5193 fsynced)",
+          "at_s": 15.587159084,
+          "write_stall_s": 0.100941084
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-1-seed1-171016"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-2",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 1793014841771,
+      "duration_s": 24.10510125,
+      "valid": true,
+      "unknown": false,
+      "ops": 4998,
+      "ok": 4106,
+      "fail": 889,
+      "info": 3,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 1.996499667,
+          "write_stall_s": 0.740162708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 8.772220583,
+          "write_stall_s": 0.645168833
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 13.793589125,
+          "write_stall_s": 0.56445425
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-2-seed2-171040"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-3",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 1793014866641,
+      "duration_s": 24.046642959,
+      "valid": true,
+      "unknown": false,
+      "ops": 4859,
+      "ok": 4024,
+      "fail": 830,
+      "info": 5,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 1.621581792,
+          "write_stall_s": 0.775410542
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 5081 → 5005 bytes (4833 fsynced)",
+          "at_s": 7.552296875,
+          "write_stall_s": 0.567701958
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 9.2560815,
+          "write_stall_s": 0.567701958
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 13.35808275,
+          "write_stall_s": 0.073738708
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-3-seed3-171105"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-4",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 1793014891290,
+      "duration_s": 24.07223675,
+      "valid": true,
+      "unknown": false,
+      "ops": 4434,
+      "ok": 3575,
+      "fail": 838,
+      "info": 21,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 1.83740325,
+          "write_stall_s": 1.4925405
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 7.834391042,
+          "write_stall_s": 1.4925405
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 12.609086083,
+          "write_stall_s": 0.696007417
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 15.870615042,
+          "write_stall_s": 0.106579667
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-4-seed4-171130"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-5",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 1793014915962,
+      "duration_s": 24.104644042,
+      "valid": true,
+      "unknown": false,
+      "ops": 5318,
+      "ok": 4325,
+      "fail": 988,
+      "info": 5,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 1.795036333,
+          "write_stall_s": 0.6854955
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 7.419681542,
+          "write_stall_s": 0.655836334
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 11.784052958,
+          "write_stall_s": 0.655836334
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-5-seed5-171155"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-6",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 1793014940690,
+      "duration_s": 24.536770625,
+      "valid": true,
+      "unknown": false,
+      "ops": 5200,
+      "ok": 4282,
+      "fail": 910,
+      "info": 8,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 2.196120875,
+          "write_stall_s": 0.085008417
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 4089 → 4089 bytes (4089 fsynced)",
+          "at_s": 7.468084208,
+          "write_stall_s": 0.672224917
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 9.647082708,
+          "write_stall_s": 0.672224917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 7313 → 7175 bytes (6941 fsynced)",
+          "at_s": 13.236265333,
+          "write_stall_s": 0.672224917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 8321 → 8148 bytes (8068 fsynced)",
+          "at_s": 16.154905833,
+          "write_stall_s": 0.56741125
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 15,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-6-seed6-171220"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-7",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 1793014965836,
+      "duration_s": 24.106648375,
+      "valid": true,
+      "unknown": false,
+      "ops": 5273,
+      "ok": 4406,
+      "fail": 864,
+      "info": 3,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7756 → 7400 bytes (7376 fsynced)",
+          "at_s": 2.299537625,
+          "write_stall_s": 0.525458417
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 4880 → 4880 bytes (4880 fsynced)",
+          "at_s": 3.836367417,
+          "write_stall_s": 0.525458417
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 6.623138542,
+          "write_stall_s": 0.525458417
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 6753 → 6753 bytes (6753 fsynced)",
+          "at_s": 12.484052125,
+          "write_stall_s": 0.098823167
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 13.803111792,
+          "write_stall_s": 0.098823167
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-7-seed7-171245"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-8",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 1793014990520,
+      "duration_s": 24.146782041,
+      "valid": true,
+      "unknown": false,
+      "ops": 4859,
+      "ok": 4065,
+      "fail": 789,
+      "info": 5,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 2.410608958,
+          "write_stall_s": 0.753091875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 8827 → 8546 bytes (8463 fsynced)",
+          "at_s": 5.951320583,
+          "write_stall_s": 0.753091875
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 7.335937958,
+          "write_stall_s": 0.753091875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 2859 → 2789 bytes (2611 fsynced)",
+          "at_s": 13.019176458,
+          "write_stall_s": 0.559985583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 2842 → 2748 bytes (2228 fsynced)",
+          "at_s": 15.376237583,
+          "write_stall_s": 0.100989875
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-8-seed8-171309"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-9",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 1793015015265,
+      "duration_s": 24.107173958,
+      "valid": true,
+      "unknown": false,
+      "ops": 5601,
+      "ok": 4586,
+      "fail": 1007,
+      "info": 8,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.474114291,
+          "write_stall_s": 0.542908959
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 7.894682708,
+          "write_stall_s": 0.1295605
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 3319 → 3258 bytes (2937 fsynced)",
+          "at_s": 13.656038125,
+          "write_stall_s": 0.090508333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 15.315374333,
+          "write_stall_s": 0.090508333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-9-seed9-171334"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-10",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 1793015040092,
+      "duration_s": 24.099577,
+      "valid": true,
+      "unknown": false,
+      "ops": 5169,
+      "ok": 4226,
+      "fail": 937,
+      "info": 6,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n5",
+          "at_s": 2.429483959,
+          "write_stall_s": 0.560527833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 7799 → 7799 bytes (7799 fsynced)",
+          "at_s": 5.565287042,
+          "write_stall_s": 0.748328333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 7.586353917,
+          "write_stall_s": 0.748328333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 13.849328875,
+          "write_stall_s": 0.748328333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-10-seed10-171359"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-11",
+      "target": "nebulaos-fixed",
+      "seed": 11,
+      "start_unix_ms": 1793015064759,
+      "duration_s": 24.061749125,
+      "valid": true,
+      "unknown": false,
+      "ops": 5435,
+      "ok": 4451,
+      "fail": 975,
+      "info": 9,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.402228416,
+          "write_stall_s": 0.094577917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 979 → 979 bytes (979 fsynced)",
+          "at_s": 6.91013325,
+          "write_stall_s": 0.077418792
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 8.683278083,
+          "write_stall_s": 0.69952225
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 6326 → 6162 bytes (5967 fsynced)",
+          "at_s": 15.544544083,
+          "write_stall_s": 0.69952225
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 1354 → 1293 bytes (1113 fsynced)",
+          "at_s": 16.910036625,
+          "write_stall_s": 0.681080333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 10,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-11-seed11-171424"
+    }
+  },
+  {
+    "profile": "crashes",
+    "summary": {
+      "name": "crashes-12",
+      "target": "nebulaos-fixed",
+      "seed": 12,
+      "start_unix_ms": 1793015089633,
+      "duration_s": 24.088166042,
+      "valid": true,
+      "unknown": false,
+      "ops": 5584,
+      "ok": 4581,
+      "fail": 1002,
+      "info": 1,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5299 → 5212 bytes (4819 fsynced)",
+          "at_s": 1.811133333,
+          "write_stall_s": 0.655922625
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 8144 → 7923 bytes (7540 fsynced)",
+          "at_s": 2.86835075,
+          "write_stall_s": 0.653048917
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 4.032027917,
+          "write_stall_s": 0.088691875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 3966 → 3966 bytes (3966 fsynced)",
+          "at_s": 10.269060833,
+          "write_stall_s": 0.097396666
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 12.343482333,
+          "write_stall_s": 0.097396666
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-crashes-12-seed12-171448"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-1",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 1793015114312,
+      "duration_s": 24.046460334,
+      "valid": true,
+      "unknown": false,
+      "ops": 5559,
+      "ok": 4331,
+      "fail": 1210,
+      "info": 18,
+      "faults": 7,
+      "stalls": [
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 28/31 of raft.log (byte 3370), restart",
+          "at_s": 2.096149459,
+          "write_stall_s": 0.715713084
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 2476 → 2392 bytes (2088 fsynced)",
+          "at_s": 5.073125167,
+          "write_stall_s": 0.715713084
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 2452 → 2452 bytes (2452 fsynced); n2: log 3852 → 3852 bytes (3852 fsynced); n3: log 6825 → 6825 bytes (6825 fsynced); n4: log 8553 → 8504 bytes (8437 fsynced); n5: log 7297 → 7297 bytes (7297 fsynced)",
+          "at_s": 6.444087042,
+          "write_stall_s": 0.715713084
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 5770 → 5770 bytes (5770 fsynced)",
+          "at_s": 9.349462125,
+          "write_stall_s": 0.654341375
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 3852 → 3852 bytes (3852 fsynced)",
+          "at_s": 11.735179334,
+          "write_stall_s": 0.654341375
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 4474 → 4474 bytes (4474 fsynced); n2: log 3852 → 3852 bytes (3852 fsynced); n3: log 2643 → 2203 bytes (2036 fsynced); n4: log 1410 → 1410 bytes (1410 fsynced); n5: log 2160 → 2160 bytes (2160 fsynced)",
+          "at_s": 14.133215959,
+          "write_stall_s": 0.621299583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 1506 → 1210 bytes (744 fsynced); n2: log 3852 → 3852 bytes (3852 fsynced); n3: log 8386 → 8383 bytes (8262 fsynced); n4: log 6780 → 6780 bytes (6780 fsynced); n5: log 7400 → 7400 bytes (7400 fsynced)",
+          "at_s": 16.186177084,
+          "write_stall_s": 0.572019208
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-1-seed1-171513"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-2",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 1793015139008,
+      "duration_s": 24.050394584,
+      "valid": true,
+      "unknown": false,
+      "ops": 5642,
+      "ok": 4313,
+      "fail": 1291,
+      "info": 38,
+      "faults": 9,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3440 → 3440 bytes (3440 fsynced); n2: log 8839 → 8839 bytes (8839 fsynced); n3: log 744 → 744 bytes (744 fsynced); n4: log 2224 → 2224 bytes (2224 fsynced); n5: log 992 → 404 bytes (388 fsynced)",
+          "at_s": 1.99624,
+          "write_stall_s": 0.889261875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3066 → 2985 bytes (2942 fsynced); n2: log 8301 → 8301 bytes (8301 fsynced); n3: log 987 → 942 bytes (863 fsynced); n4: log 979 → 979 bytes (979 fsynced); n5: log 482 → 482 bytes (482 fsynced)",
+          "at_s": 3.788533917,
+          "write_stall_s": 0.736285583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 1647 → 1310 bytes (1021 fsynced); n2: log 6879 → 6879 bytes (6879 fsynced); n3: log 7263 → 7263 bytes (7263 fsynced); n4: log 8136 → 8136 bytes (8136 fsynced); n5: log 7012 → 7012 bytes (7012 fsynced)",
+          "at_s": 5.02607375,
+          "write_stall_s": 0.693079625
+        },
+        {
+          "fault": "corrupt-snapshot",
+          "detail": "crash n4, flipped a bit in snapshot.bin body at byte 26853, restart",
+          "at_s": 6.431723625,
+          "write_stall_s": 0.639682166
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 258 → 258 bytes (258 fsynced)",
+          "at_s": 8.778063084,
+          "write_stall_s": 0.639682166
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8332 → 8332 bytes (8332 fsynced); n2: log 7585 → 7289 bytes (7089 fsynced); n3: log 2462 → 1862 bytes (1848 fsynced); n4: log 1589 → 1589 bytes (1589 fsynced); n5: log 7709 → 7709 bytes (7709 fsynced)",
+          "at_s": 11.341041042,
+          "write_stall_s": 0.639682166
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7845 → 7670 bytes (7368 fsynced); n2: log 8378 → 8378 bytes (8378 fsynced); n3: log 2585 → 2585 bytes (2585 fsynced); n4: log 1589 → 1589 bytes (1589 fsynced); n5: log 8867 → 8753 bytes (8514 fsynced)",
+          "at_s": 13.050073875,
+          "write_stall_s": 0.639255375
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 7860 → 7792 bytes (7736 fsynced)",
+          "at_s": 14.530188292,
+          "write_stall_s": 0.080757292
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 1589 → 1589 bytes (1589 fsynced)",
+          "at_s": 16.383068334,
+          "write_stall_s": 0.080757292
+        }
+      ],
+      "refused_to_start": {
+        "n4": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-2-seed2-171538"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-3",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 1793015163733,
+      "duration_s": 24.084364125,
+      "valid": true,
+      "unknown": false,
+      "ops": 5726,
+      "ok": 4310,
+      "fail": 1379,
+      "info": 37,
+      "faults": 9,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8368 → 8368 bytes (8368 fsynced); n2: log 1356 → 1285 bytes (1224 fsynced); n3: log 8740 → 8740 bytes (8740 fsynced); n4: log 8392 → 8392 bytes (8392 fsynced); n5: log 232 → 232 bytes (232 fsynced)",
+          "at_s": 1.621030375,
+          "write_stall_s": 0.730103209
+        },
+        {
+          "fault": "snapshot-header",
+          "detail": "crash n4, flipped a bit in snapshot.bin header (term) at byte 8, restart",
+          "at_s": 2.898288125,
+          "write_stall_s": 0.730103209
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8565 → 8565 bytes (8565 fsynced); n2: log 3225 → 3225 bytes (3225 fsynced); n3: log 739 → 739 bytes (739 fsynced); n4: log 8407 → 8407 bytes (8407 fsynced); n5: log 491 → 491 bytes (491 fsynced)",
+          "at_s": 4.603030375,
+          "write_stall_s": 0.730103209
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 6542 → 6114 bytes (6052 fsynced)",
+          "at_s": 7.1911735,
+          "write_stall_s": 0.971378
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 8407 → 8407 bytes (8407 fsynced)",
+          "at_s": 8.404828,
+          "write_stall_s": 0.971378
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 366 → 148 bytes (124 fsynced); n2: log 3006 → 2686 bytes (2646 fsynced); n3: log 4500 → 4399 bytes (4382 fsynced); n4: log 8407 → 8407 bytes (8407 fsynced); n5: log 3006 → 3006 bytes (3006 fsynced)",
+          "at_s": 10.003035417,
+          "write_stall_s": 0.971378
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3708 → 3708 bytes (3708 fsynced); n2: log 5302 → 5302 bytes (5302 fsynced); n3: log 5562 → 5243 bytes (5184 fsynced); n4: log 8407 → 8407 bytes (8407 fsynced); n5: log 6064 → 6064 bytes (6064 fsynced)",
+          "at_s": 11.651107083,
+          "write_stall_s": 0.971378
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 7630 → 7630 bytes (7630 fsynced)",
+          "at_s": 14.178023,
+          "write_stall_s": 0.971378
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8486 → 8307 bytes (8238 fsynced); n2: log 7860 → 7860 bytes (7860 fsynced); n3: log 8486 → 8486 bytes (8486 fsynced); n4: log 8407 → 8407 bytes (8407 fsynced); n5: log 8604 → 8604 bytes (8604 fsynced)",
+          "at_s": 16.015698417,
+          "write_stall_s": 0.954297708
+        }
+      ],
+      "refused_to_start": {
+        "n4": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-3-seed3-171603"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-4",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 1793015188476,
+      "duration_s": 24.03739125,
+      "valid": true,
+      "unknown": false,
+      "ops": 5218,
+      "ok": 3983,
+      "fail": 1203,
+      "info": 32,
+      "faults": 9,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 984 → 641 bytes (612 fsynced)",
+          "at_s": 1.837344791,
+          "write_stall_s": 0.73837525
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6113 → 5933 bytes (5385 fsynced); n2: log 7423 → 7344 bytes (7191 fsynced); n3: log 7059 → 6947 bytes (6943 fsynced); n4: log 6113 → 6113 bytes (6113 fsynced); n5: log 7191 → 7191 bytes (7191 fsynced)",
+          "at_s": 3.571158166,
+          "write_stall_s": 0.7871175
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8320 → 8320 bytes (8320 fsynced); n2: log 8204 → 8204 bytes (8204 fsynced); n3: log 590 → 590 bytes (590 fsynced); n4: log 965 → 913 bytes (474 fsynced); n5: log 590 → 590 bytes (590 fsynced)",
+          "at_s": 5.338061541,
+          "write_stall_s": 0.7871175
+        },
+        {
+          "fault": "corrupt-snapshot",
+          "detail": "crash n1, flipped a bit in snapshot.bin body at byte 32161, restart",
+          "at_s": 6.843168875,
+          "write_stall_s": 0.840273458
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8957 → 8957 bytes (8957 fsynced)",
+          "at_s": 9.372104375,
+          "write_stall_s": 0.887664459
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 3046 → 3009 bytes (2786 fsynced)",
+          "at_s": 10.917036791,
+          "write_stall_s": 0.887664459
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8957 → 8957 bytes (8957 fsynced); n2: log 4618 → 4618 bytes (4618 fsynced); n3: log 4872 → 4872 bytes (4872 fsynced); n4: log 4240 → 4240 bytes (4240 fsynced); n5: log 3214 → 3214 bytes (3214 fsynced)",
+          "at_s": 12.313585583,
+          "write_stall_s": 0.887664459
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8957 → 8957 bytes (8957 fsynced); n2: log 8650 → 8534 bytes (8390 fsynced); n3: log 8012 → 8012 bytes (8012 fsynced); n4: log 7907 → 7907 bytes (7907 fsynced); n5: log 6899 → 6899 bytes (6899 fsynced)",
+          "at_s": 15.272961708,
+          "write_stall_s": 0.887664459
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8957 → 8957 bytes (8957 fsynced); n2: log 8441 → 8274 bytes (8193 fsynced); n3: log 7815 → 7815 bytes (7815 fsynced); n4: log 8193 → 8193 bytes (8193 fsynced); n5: log 6684 → 6684 bytes (6684 fsynced)",
+          "at_s": 16.928071541,
+          "write_stall_s": 0.872323834
+        }
+      ],
+      "refused_to_start": {
+        "n1": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-4-seed4-171627"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-5",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 1793015213154,
+      "duration_s": 24.059469833,
+      "valid": true,
+      "unknown": false,
+      "ops": 5384,
+      "ok": 4133,
+      "fail": 1224,
+      "info": 27,
+      "faults": 8,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 4716 → 4153 bytes (4120 fsynced)",
+          "at_s": 1.795074291,
+          "write_stall_s": 0.806015583
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n4, flipped a bit in record 52/64 of raft.log (byte 6378), restart",
+          "at_s": 3.506168958,
+          "write_stall_s": 0.806015583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6483 → 6366 bytes (6119 fsynced); n2: log 6235 → 6235 bytes (6235 fsynced); n3: log 5399 → 5068 bytes (5035 fsynced); n4: log 7949 → 7949 bytes (7949 fsynced); n5: log 7699 → 7609 bytes (7451 fsynced)",
+          "at_s": 5.201629833,
+          "write_stall_s": 0.806015583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 4439 → 4437 bytes (4315 fsynced); n2: log 4921 → 4815 bytes (4804 fsynced); n3: log 3957 → 3957 bytes (3957 fsynced); n4: log 7949 → 7949 bytes (7949 fsynced); n5: log 4804 → 4804 bytes (4804 fsynced)",
+          "at_s": 6.788050625,
+          "write_stall_s": 0.806015583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 365 → 365 bytes (365 fsynced); n2: log 1478 → 1478 bytes (1478 fsynced); n3: log 757 → 678 bytes (251 fsynced); n4: log 7949 → 7949 bytes (7949 fsynced); n5: log 1603 → 1603 bytes (1603 fsynced)",
+          "at_s": 7.941396666,
+          "write_stall_s": 0.806015583
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 4430 → 4430 bytes (4430 fsynced)",
+          "at_s": 9.995403666,
+          "write_stall_s": 0.794293375
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 483 → 252 bytes (242 fsynced); n2: log 7171 → 7171 bytes (7171 fsynced); n3: log 1209 → 1208 bytes (973 fsynced); n4: log 7949 → 7949 bytes (7949 fsynced); n5: log 8393 → 8333 bytes (8157 fsynced)",
+          "at_s": 12.486762458,
+          "write_stall_s": 0.784856917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3390 → 3361 bytes (3142 fsynced); n2: log 2528 → 2528 bytes (2528 fsynced); n3: log 3638 → 3625 bytes (3390 fsynced); n4: log 7949 → 7949 bytes (7949 fsynced); n5: log 3638 → 3638 bytes (3638 fsynced)",
+          "at_s": 14.706331541,
+          "write_stall_s": 0.707434
+        }
+      ],
+      "refused_to_start": {
+        "n4": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-5-seed5-171652"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-6",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 1793015237872,
+      "duration_s": 24.133075375,
+      "valid": true,
+      "unknown": false,
+      "ops": 5577,
+      "ok": 4255,
+      "fail": 1298,
+      "info": 24,
+      "faults": 7,
+      "stalls": [
+        {
+          "fault": "corrupt-snapshot",
+          "detail": "crash n2, flipped a bit in snapshot.bin body at byte 9770, restart",
+          "at_s": 2.197269209,
+          "write_stall_s": 0.816964125
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8305 → 8156 bytes (8057 fsynced); n2: log 6756 → 6756 bytes (6756 fsynced); n3: log 6980 → 6980 bytes (6980 fsynced); n4: log 5392 → 5392 bytes (5392 fsynced); n5: log 6972 → 6972 bytes (6972 fsynced)",
+          "at_s": 4.069763417,
+          "write_stall_s": 0.85636125
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3572 → 3427 bytes (3182 fsynced); n2: log 6756 → 6756 bytes (6756 fsynced); n3: log 3812 → 3812 bytes (3812 fsynced); n4: log 3299 → 3253 bytes (3066 fsynced); n5: log 4526 → 4362 bytes (4286 fsynced)",
+          "at_s": 6.676052792,
+          "write_stall_s": 0.85636125
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 8620 → 8620 bytes (8620 fsynced)",
+          "at_s": 9.273044417,
+          "write_stall_s": 0.85636125
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6935 → 6873 bytes (6576 fsynced); n2: log 6756 → 6756 bytes (6756 fsynced); n3: log 6821 → 6592 bytes (6445 fsynced); n4: log 1254 → 800 bytes (742 fsynced); n5: log 5808 → 5808 bytes (5808 fsynced)",
+          "at_s": 11.909066834,
+          "write_stall_s": 0.826048666
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3614 → 3558 bytes (3366 fsynced); n2: log 6756 → 6756 bytes (6756 fsynced); n3: log 2646 → 2493 bytes (2398 fsynced); n4: log 5864 → 5785 bytes (5604 fsynced); n5: log 3142 → 3137 bytes (3024 fsynced)",
+          "at_s": 14.055244084,
+          "write_stall_s": 0.664813458
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 6756 → 6756 bytes (6756 fsynced)",
+          "at_s": 16.980314792,
+          "write_stall_s": 0.120715666
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-6-seed6-171717"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-7",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 1793015262617,
+      "duration_s": 24.05330275,
+      "valid": true,
+      "unknown": false,
+      "ops": 5689,
+      "ok": 4532,
+      "fail": 1131,
+      "info": 26,
+      "faults": 9,
+      "stalls": [
+        {
+          "fault": "snapshot-header",
+          "detail": "crash n1, flipped a bit in snapshot.bin header (term) at byte 8, restart",
+          "at_s": 2.299296666,
+          "write_stall_s": 0.640636417
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6972 → 6972 bytes (6972 fsynced); n2: log 8711 → 8438 bytes (7965 fsynced); n3: log 8587 → 8587 bytes (8587 fsynced); n4: log 2998 → 2747 bytes (2601 fsynced); n5: log 8594 → 8594 bytes (8594 fsynced)",
+          "at_s": 3.837155375,
+          "write_stall_s": 0.640636417
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 7204 → 7204 bytes (7204 fsynced)",
+          "at_s": 5.934232208,
+          "write_stall_s": 0.583647875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 7841 → 7478 bytes (7342 fsynced)",
+          "at_s": 7.657025333,
+          "write_stall_s": 0.622309833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 1717 → 1694 bytes (1593 fsynced)",
+          "at_s": 9.00532675,
+          "write_stall_s": 0.622309833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 6055 → 5877 bytes (5801 fsynced)",
+          "at_s": 10.349190875,
+          "write_stall_s": 0.622309833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 2832 → 2755 bytes (2696 fsynced)",
+          "at_s": 13.202362333,
+          "write_stall_s": 0.622309833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 4667 → 4599 bytes (3800 fsynced)",
+          "at_s": 14.980252666,
+          "write_stall_s": 0.622309833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6972 → 6972 bytes (6972 fsynced); n2: log 8218 → 8131 bytes (8100 fsynced); n3: log 7604 → 7604 bytes (7604 fsynced); n4: log 7846 → 7846 bytes (7846 fsynced); n5: log 7722 → 7722 bytes (7722 fsynced)",
+          "at_s": 16.554176791,
+          "write_stall_s": 0.622309833
+        }
+      ],
+      "refused_to_start": {
+        "n1": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 11,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-7-seed7-171742"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-8",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 1793015287315,
+      "duration_s": 24.097355792,
+      "valid": true,
+      "unknown": false,
+      "ops": 5380,
+      "ok": 4213,
+      "fail": 1143,
+      "info": 24,
+      "faults": 8,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 4060 → 4050 bytes (3192 fsynced); n2: log 3332 → 3332 bytes (3332 fsynced); n3: log 5448 → 5065 bytes (4952 fsynced); n4: log 4192 → 4105 bytes (3936 fsynced); n5: log 3820 → 3820 bytes (3820 fsynced)",
+          "at_s": 2.410299875,
+          "write_stall_s": 1.577562416
+        },
+        {
+          "fault": "delete-snapshot",
+          "detail": "crash n4, deleted snapshot.bin (compacted log kept), restart",
+          "at_s": 4.168133375,
+          "write_stall_s": 1.566140333
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 7086 → 7086 bytes (7086 fsynced)",
+          "at_s": 5.553637167,
+          "write_stall_s": 0.575307542
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 8761 → 8761 bytes (8761 fsynced)",
+          "at_s": 8.152182125,
+          "write_stall_s": 0.575307542
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5719 → 5357 bytes (5329 fsynced)",
+          "at_s": 10.942516583,
+          "write_stall_s": 0.567662334
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7251 → 7251 bytes (7251 fsynced)",
+          "at_s": 12.9640405,
+          "write_stall_s": 0.19989575
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 2794 → 2716 bytes (2404 fsynced)",
+          "at_s": 14.072095667,
+          "write_stall_s": 0.19989575
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 3100 → 3100 bytes (3100 fsynced)",
+          "at_s": 15.529248875,
+          "write_stall_s": 0.19989575
+        }
+      ],
+      "refused_to_start": {
+        "n4": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-8-seed8-171806"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-9",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 1793015312005,
+      "duration_s": 24.108597459,
+      "valid": true,
+      "unknown": false,
+      "ops": 4706,
+      "ok": 3600,
+      "fail": 1072,
+      "info": 34,
+      "faults": 8,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5888 → 5806 bytes (5772 fsynced)",
+          "at_s": 2.474169792,
+          "write_stall_s": 0.854719917
+        },
+        {
+          "fault": "corrupt-snapshot",
+          "detail": "crash n5, flipped a bit in snapshot.bin body at byte 17854, restart",
+          "at_s": 3.781172584,
+          "write_stall_s": 0.854719917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6954 → 6954 bytes (6954 fsynced); n2: log 6242 → 6242 bytes (6242 fsynced); n3: log 8179 → 8131 bytes (7823 fsynced); n4: log 6234 → 6234 bytes (6234 fsynced); n5: log 2348 → 2348 bytes (2348 fsynced)",
+          "at_s": 5.052056625,
+          "write_stall_s": 0.854719917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7777 → 7547 bytes (7296 fsynced); n2: log 7777 → 7777 bytes (7777 fsynced); n3: log 1461 → 1000 bytes (855 fsynced); n4: log 7297 → 7297 bytes (7297 fsynced); n5: log 2348 → 2348 bytes (2348 fsynced)",
+          "at_s": 6.087246959,
+          "write_stall_s": 0.854719917
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 2348 → 2348 bytes (2348 fsynced)",
+          "at_s": 8.835050209,
+          "write_stall_s": 1.540085166
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 4062 → 3912 bytes (3569 fsynced); n2: log 4692 → 4624 bytes (4333 fsynced); n3: log 4474 → 4296 bytes (4062 fsynced); n4: log 5372 → 5284 bytes (5238 fsynced); n5: log 2348 → 2348 bytes (2348 fsynced)",
+          "at_s": 9.890029042,
+          "write_stall_s": 1.540085166
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 1107 → 655 bytes (365 fsynced)",
+          "at_s": 12.8571765,
+          "write_stall_s": 1.540085166
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7466 → 7251 bytes (6947 fsynced); n2: log 7218 → 6973 bytes (6847 fsynced); n3: log 8197 → 7897 bytes (7826 fsynced); n4: log 7218 → 7218 bytes (7218 fsynced); n5: log 2348 → 2348 bytes (2348 fsynced)",
+          "at_s": 15.119175084,
+          "write_stall_s": 1.531550541
+        }
+      ],
+      "refused_to_start": {
+        "n5": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-9-seed9-171831"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-10",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 1793015336701,
+      "duration_s": 24.051120833,
+      "valid": true,
+      "unknown": false,
+      "ops": 5513,
+      "ok": 4276,
+      "fail": 1204,
+      "info": 33,
+      "faults": 7,
+      "stalls": [
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 2232 → 2225 bytes (2116 fsynced); n2: log 2844 → 2733 bytes (2364 fsynced); n3: log 2720 → 2720 bytes (2720 fsynced); n4: log 3690 → 3340 bytes (3224 fsynced); n5: log 3690 → 3690 bytes (3690 fsynced)",
+          "at_s": 2.429243792,
+          "write_stall_s": 0.856921167
+        },
+        {
+          "fault": "snapshot-header",
+          "detail": "crash n5, flipped a bit in snapshot.bin header (term) at byte 10, restart",
+          "at_s": 3.950254417,
+          "write_stall_s": 0.93079
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 3005 → 3005 bytes (3005 fsynced); n2: log 3246 → 3130 bytes (3129 fsynced); n3: log 2407 → 2407 bytes (2407 fsynced); n4: log 2166 → 2166 bytes (2166 fsynced); n5: log 8329 → 8329 bytes (8329 fsynced)",
+          "at_s": 5.970068667,
+          "write_stall_s": 0.93079
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 1489 → 1250 bytes (991 fsynced)",
+          "at_s": 8.138230042,
+          "write_stall_s": 0.93079
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7319 → 7319 bytes (7319 fsynced)",
+          "at_s": 10.701043042,
+          "write_stall_s": 0.93079
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8322 → 8322 bytes (8322 fsynced); n2: log 2160 → 2160 bytes (2160 fsynced); n3: log 4563 → 4383 bytes (4303 fsynced); n4: log 3294 → 3294 bytes (3294 fsynced); n5: log 8329 → 8329 bytes (8329 fsynced)",
+          "at_s": 12.191076833,
+          "write_stall_s": 0.928961084
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6814 → 6489 bytes (6418 fsynced); n2: log 7682 → 7682 bytes (7682 fsynced); n3: log 378 → 378 bytes (378 fsynced); n4: log 1016 → 1016 bytes (1016 fsynced); n5: log 8329 → 8329 bytes (8329 fsynced)",
+          "at_s": 14.889378167,
+          "write_stall_s": 0.806055416
+        }
+      ],
+      "refused_to_start": {
+        "n5": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-10-seed10-171856"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-11",
+      "target": "nebulaos-fixed",
+      "seed": 11,
+      "start_unix_ms": 1793015361482,
+      "duration_s": 24.08094475,
+      "valid": true,
+      "unknown": false,
+      "ops": 5377,
+      "ok": 4038,
+      "fail": 1294,
+      "info": 45,
+      "faults": 7,
+      "stalls": [
+        {
+          "fault": "flip-log",
+          "detail": "crash n3, flipped a bit in record 18/71 of raft.log (byte 2180), restart",
+          "at_s": 2.402134709,
+          "write_stall_s": 0.803364542
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5440 → 5440 bytes (5440 fsynced); n2: log 8508 → 8373 bytes (8268 fsynced); n3: log 8740 → 8740 bytes (8740 fsynced); n4: log 1736 → 1679 bytes (1612 fsynced); n5: log 7292 → 7292 bytes (7292 fsynced)",
+          "at_s": 5.265083042,
+          "write_stall_s": 0.803364542
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7443 → 7431 bytes (7078 fsynced); n2: log 8933 → 8933 bytes (8933 fsynced); n3: log 8740 → 8740 bytes (8740 fsynced); n4: log 2712 → 2712 bytes (2712 fsynced); n5: log 8755 → 8638 bytes (8288 fsynced)",
+          "at_s": 6.351069875,
+          "write_stall_s": 0.803364542
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 1074 → 1074 bytes (1074 fsynced); n2: log 1074 → 487 bytes (475 fsynced); n3: log 8740 → 8740 bytes (8740 fsynced); n4: log 4438 → 4438 bytes (4438 fsynced); n5: log 2417 → 2417 bytes (2417 fsynced)",
+          "at_s": 8.168071,
+          "write_stall_s": 0.764652584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 7751 → 7751 bytes (7751 fsynced)",
+          "at_s": 9.380064209,
+          "write_stall_s": 0.727530416
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6030 → 5962 bytes (5534 fsynced); n2: log 7004 → 6872 bytes (6762 fsynced); n3: log 8740 → 8740 bytes (8740 fsynced); n4: log 1990 → 1990 bytes (1990 fsynced); n5: log 2752 → 2673 bytes (2616 fsynced)",
+          "at_s": 12.294008792,
+          "write_stall_s": 0.727530416
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 8474 → 8474 bytes (8474 fsynced); n2: log 1742 → 1742 bytes (1742 fsynced); n3: log 8740 → 8740 bytes (8740 fsynced); n4: log 6418 → 6333 bytes (6046 fsynced); n5: log 5296 → 5296 bytes (5296 fsynced)",
+          "at_s": 15.209059542,
+          "write_stall_s": 0.715636833
+        }
+      ],
+      "refused_to_start": {
+        "n3": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 13,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-11-seed11-171920"
+    }
+  },
+  {
+    "profile": "disk",
+    "summary": {
+      "name": "disk-12",
+      "target": "nebulaos-fixed",
+      "seed": 12,
+      "start_unix_ms": 1793015386182,
+      "duration_s": 24.055056917,
+      "valid": true,
+      "unknown": false,
+      "ops": 5470,
+      "ok": 4185,
+      "fail": 1262,
+      "info": 23,
+      "faults": 8,
+      "stalls": [
+        {
+          "fault": "delete-snapshot",
+          "detail": "crash n1, deleted snapshot.bin (compacted log kept), restart",
+          "at_s": 1.811238708,
+          "write_stall_s": 0.774771584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 2720 → 2720 bytes (2720 fsynced)",
+          "at_s": 2.868257833,
+          "write_stall_s": 0.774771584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 8344 → 8211 bytes (7980 fsynced)",
+          "at_s": 4.957927292,
+          "write_stall_s": 0.774771584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5049 → 5049 bytes (5049 fsynced); n2: log 744 → 744 bytes (744 fsynced); n3: log 8684 → 8684 bytes (8684 fsynced); n4: log 1720 → 1546 bytes (1232 fsynced); n5: log 8916 → 8916 bytes (8916 fsynced)",
+          "at_s": 7.031133583,
+          "write_stall_s": 0.774771584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 2630 → 2630 bytes (2630 fsynced)",
+          "at_s": 8.935638,
+          "write_stall_s": 0.774771584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5049 → 5049 bytes (5049 fsynced); n2: log 9154 → 8673 bytes (8666 fsynced); n3: log 7454 → 7454 bytes (7454 fsynced); n4: log 8289 → 8289 bytes (8289 fsynced); n5: log 8423 → 8269 bytes (8171 fsynced)",
+          "at_s": 10.070149167,
+          "write_stall_s": 0.774771584
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5049 → 5049 bytes (5049 fsynced); n2: log 7884 → 7682 bytes (7246 fsynced); n3: log 8138 → 7712 bytes (7618 fsynced); n4: log 1593 → 1542 bytes (1351 fsynced); n5: log 1351 → 1351 bytes (1351 fsynced)",
+          "at_s": 12.596432625,
+          "write_stall_s": 0.566167125
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 6844 → 6844 bytes (6844 fsynced)",
+          "at_s": 14.592568083,
+          "write_stall_s": 0.073454917
+        }
+      ],
+      "refused_to_start": {
+        "n1": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 8,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-disk-12-seed12-171945"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-1",
+      "target": "nebulaos-fixed",
+      "seed": 1,
+      "start_unix_ms": 1793015411065,
+      "duration_s": 24.078500667,
+      "valid": true,
+      "unknown": false,
+      "ops": 4638,
+      "ok": 3746,
+      "fail": 870,
+      "info": 22,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n2",
+          "at_s": 2.09668175,
+          "write_stall_s": 0.694807709
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 5177 → 5177 bytes (5177 fsynced); n2: log 6207 → 6207 bytes (6207 fsynced); n3: log 8203 → 8203 bytes (8203 fsynced); n4: log 4080 → 4080 bytes (4080 fsynced); n5: log 5061 → 5061 bytes (5061 fsynced)",
+          "at_s": 6.325200167,
+          "write_stall_s": 0.680175833
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n2: log 4907 → 4907 bytes (4907 fsynced)",
+          "at_s": 7.6411115,
+          "write_stall_s": 0.67107375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 10.58604975,
+          "write_stall_s": 0.67107375
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 2498 → 2471 bytes (2114 fsynced); n2: log 4016 → 4016 bytes (4016 fsynced); n3: log 5398 → 5398 bytes (5398 fsynced); n4: log 1116 → 1116 bytes (1116 fsynced); n5: log 980 → 980 bytes (980 fsynced)",
+          "at_s": 15.587987375,
+          "write_stall_s": 0.6631465
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 19,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-1-seed1-172010"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-2",
+      "target": "nebulaos-fixed",
+      "seed": 2,
+      "start_unix_ms": 1793015435769,
+      "duration_s": 24.097250459,
+      "valid": true,
+      "unknown": false,
+      "ops": 4053,
+      "ok": 3395,
+      "fail": 584,
+      "info": 74,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n3 n4] | [n2 n5 n1]",
+          "at_s": 1.996075167,
+          "write_stall_s": 0.231983125
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n5 n1 n4 n2 n3",
+          "at_s": 8.772478834,
+          "write_stall_s": 0.231983125
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n2 n4] \u003c- n3 -\u003e [n5 n1]",
+          "at_s": 13.795045084,
+          "write_stall_s": 0.081681375
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-2-seed2-172035"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-3",
+      "target": "nebulaos-fixed",
+      "seed": 3,
+      "start_unix_ms": 1793015460466,
+      "duration_s": 24.0764685,
+      "valid": true,
+      "unknown": false,
+      "ops": 4320,
+      "ok": 3627,
+      "fail": 635,
+      "info": 58,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "majorities ring n2 n4 n1 n5 n3",
+          "at_s": 1.621372834,
+          "write_stall_s": 0.172390667
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 268 → 268 bytes (268 fsynced)",
+          "at_s": 7.552940542,
+          "write_stall_s": 0.124654541
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n4 n2] \u003c- n5 -\u003e [n3 n1]",
+          "at_s": 9.256236875,
+          "write_stall_s": 0.124654541
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n1",
+          "at_s": 13.358058084,
+          "write_stall_s": 0.0926425
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 40,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-3-seed3-172059"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-4",
+      "target": "nebulaos-fixed",
+      "seed": 4,
+      "start_unix_ms": 1793015485232,
+      "duration_s": 24.068690792,
+      "valid": true,
+      "unknown": false,
+      "ops": 4490,
+      "ok": 3737,
+      "fail": 702,
+      "info": 51,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4] | [n2 n1 n5 n3]",
+          "at_s": 1.837102875,
+          "write_stall_s": 0.74641925
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n3 n4 n5 n2 n1",
+          "at_s": 7.832687917,
+          "write_stall_s": 0.251513958
+        },
+        {
+          "fault": "partition",
+          "detail": "[n4 n2] | [n5 n1 n3]",
+          "at_s": 12.609797875,
+          "write_stall_s": 0.194730583
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 15.870130958,
+          "write_stall_s": 0.0935895
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 5,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-4-seed4-172124"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-5",
+      "target": "nebulaos-fixed",
+      "seed": 5,
+      "start_unix_ms": 1793015509948,
+      "duration_s": 24.07492875,
+      "valid": true,
+      "unknown": false,
+      "ops": 4146,
+      "ok": 3439,
+      "fail": 636,
+      "info": 71,
+      "faults": 3,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1] | [n3 n5 n4 n2]",
+          "at_s": 1.795374292,
+          "write_stall_s": 0.9987335
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 7.419290584,
+          "write_stall_s": 0.9987335
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n4 n2] \u003c- n3 -\u003e [n5 n1]",
+          "at_s": 11.785283334,
+          "write_stall_s": 0.525093834
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 4,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-5-seed5-172149"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-6",
+      "target": "nebulaos-fixed",
+      "seed": 6,
+      "start_unix_ms": 1793015534637,
+      "duration_s": 24.066188916,
+      "valid": true,
+      "unknown": false,
+      "ops": 5547,
+      "ok": 4517,
+      "fail": 1023,
+      "info": 7,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 2.196725375,
+          "write_stall_s": 0.910815542
+        },
+        {
+          "fault": "snapshot-header",
+          "detail": "crash n2, flipped a bit in snapshot.bin header (term) at byte 9, restart",
+          "at_s": 7.467049583,
+          "write_stall_s": 0.945711916
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 9.647219875,
+          "write_stall_s": 0.945711916
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 6183 → 6089 bytes (5931 fsynced)",
+          "at_s": 13.236047458,
+          "write_stall_s": 0.924125208
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n2 n1 n3 n4 n5",
+          "at_s": 14.816557833,
+          "write_stall_s": 0.092211459
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 10,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-6-seed6-172214"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-7",
+      "target": "nebulaos-fixed",
+      "seed": 7,
+      "start_unix_ms": 1793015559339,
+      "duration_s": 24.234365458,
+      "valid": true,
+      "unknown": false,
+      "ops": 5751,
+      "ok": 4587,
+      "fail": 1131,
+      "info": 33,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "flip-log",
+          "detail": "crash n1, flipped a bit in record 5/70 of raft.log (byte 535), restart",
+          "at_s": 2.299855417,
+          "write_stall_s": 0.080701208
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n2",
+          "at_s": 3.836655,
+          "write_stall_s": 0.693711875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n3: log 6141 → 5959 bytes (5882 fsynced)",
+          "at_s": 9.888808625,
+          "write_stall_s": 1.014217583
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5] | [n4 n1 n3 n2]",
+          "at_s": 12.840291167,
+          "write_stall_s": 1.014217583
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n2 cut off: [n2] | [n1 n4 n5 n3]",
+          "at_s": 16.202071542,
+          "write_stall_s": 1.014217583
+        }
+      ],
+      "refused_to_start": {
+        "n1": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 9,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-7-seed7-172238"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-8",
+      "target": "nebulaos-fixed",
+      "seed": 8,
+      "start_unix_ms": 1793015584183,
+      "duration_s": 24.052881166,
+      "valid": true,
+      "unknown": false,
+      "ops": 4332,
+      "ok": 3536,
+      "fail": 732,
+      "info": 64,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n2 n4] | [n3 n1 n5]",
+          "at_s": 2.410091416,
+          "write_stall_s": 3.448043834
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n5, flipped a bit in record 8/61 of raft.log (byte 904), restart",
+          "at_s": 5.951375583,
+          "write_stall_s": 3.448043834
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n1 cut off: [n1 n3] | [n5 n4 n2]",
+          "at_s": 7.335223125,
+          "write_stall_s": 3.448043834
+        },
+        {
+          "fault": "partition",
+          "detail": "majorities ring n3 n1 n5 n2 n4",
+          "at_s": 13.0194745,
+          "write_stall_s": 1.815537083
+        }
+      ],
+      "refused_to_start": {
+        "n5": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-8-seed8-172303"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-9",
+      "target": "nebulaos-fixed",
+      "seed": 9,
+      "start_unix_ms": 1793015608814,
+      "duration_s": 24.069701458,
+      "valid": true,
+      "unknown": false,
+      "ops": 5385,
+      "ok": 4391,
+      "fail": 968,
+      "info": 26,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "leader n4 cut off: [n4] | [n5 n3 n2 n1]",
+          "at_s": 2.474017208,
+          "write_stall_s": 0.658290708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 7.895416875,
+          "write_stall_s": 0.658290708
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n3, flipped a bit in record 45/52 of raft.log (byte 5545), restart",
+          "at_s": 13.657519875,
+          "write_stall_s": 0.090280334
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n5",
+          "at_s": 15.315083375,
+          "write_stall_s": 0.090280334
+        }
+      ],
+      "refused_to_start": {
+        "n3": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-9-seed9-172328"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-10",
+      "target": "nebulaos-fixed",
+      "seed": 10,
+      "start_unix_ms": 1793015633606,
+      "duration_s": 24.0587785,
+      "valid": true,
+      "unknown": false,
+      "ops": 4605,
+      "ok": 3803,
+      "fail": 747,
+      "info": 55,
+      "faults": 4,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "majorities ring n4 n2 n1 n3 n5",
+          "at_s": 2.429226833,
+          "write_stall_s": 0.753148875
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 1827 → 1827 bytes (1827 fsynced); n2: log 8880 → 8867 bytes (8746 fsynced); n3: log 2219 → 1618 bytes (836 fsynced); n4: log 3840 → 3585 bytes (3582 fsynced); n5: log 2219 → 2219 bytes (2219 fsynced)",
+          "at_s": 5.565074125,
+          "write_stall_s": 1.012056667
+        },
+        {
+          "fault": "partition",
+          "detail": "bridge: [n2 n3] \u003c- n5 -\u003e [n4 n1]",
+          "at_s": 7.586052542,
+          "write_stall_s": 1.012056667
+        },
+        {
+          "fault": "partition",
+          "detail": "leader n5 cut off: [n5 n4] | [n3 n2 n1]",
+          "at_s": 13.849071583,
+          "write_stall_s": 1.012056667
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 6,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-10-seed10-172352"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-11",
+      "target": "nebulaos-fixed",
+      "seed": 11,
+      "start_unix_ms": 1793015658368,
+      "duration_s": 24.117701666,
+      "valid": true,
+      "unknown": false,
+      "ops": 5098,
+      "ok": 4097,
+      "fail": 961,
+      "info": 40,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n3",
+          "at_s": 2.402046375,
+          "write_stall_s": 1.0165465
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n1: log 6557 → 6301 bytes (6061 fsynced); n2: log 8095 → 8095 bytes (8095 fsynced); n3: log 6061 → 6061 bytes (6061 fsynced); n4: log 6939 → 6939 bytes (6939 fsynced); n5: log 6309 → 6309 bytes (6309 fsynced)",
+          "at_s": 6.910138208,
+          "write_stall_s": 1.0165465
+        },
+        {
+          "fault": "pause",
+          "detail": "SIGSTOP n4",
+          "at_s": 8.6831605,
+          "write_stall_s": 1.0165465
+        },
+        {
+          "fault": "delete-snapshot",
+          "detail": "crash n2, deleted snapshot.bin (compacted log kept), restart",
+          "at_s": 15.544142166,
+          "write_stall_s": 0.072786667
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n5: log 7784 → 7784 bytes (7784 fsynced)",
+          "at_s": 16.909189166,
+          "write_stall_s": 0.072786667
+        }
+      ],
+      "refused_to_start": {
+        "n2": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-11-seed11-172417"
+    }
+  },
+  {
+    "profile": "mixed",
+    "summary": {
+      "name": "mixed-12",
+      "target": "nebulaos-fixed",
+      "seed": 12,
+      "start_unix_ms": 1793015683249,
+      "duration_s": 24.08759025,
+      "valid": true,
+      "unknown": false,
+      "ops": 6111,
+      "ok": 4765,
+      "fail": 1344,
+      "info": 2,
+      "faults": 5,
+      "stalls": [
+        {
+          "fault": "snapshot-header",
+          "detail": "crash n1, flipped a bit in snapshot.bin header (term) at byte 10, restart",
+          "at_s": 1.811262708,
+          "write_stall_s": 0.808867709
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 1845 → 1845 bytes (1845 fsynced)",
+          "at_s": 2.868204958,
+          "write_stall_s": 0.808867709
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 4.032263917,
+          "write_stall_s": 0.808867709
+        },
+        {
+          "fault": "powerloss",
+          "detail": "power cut, unsynced writes lost, restarted — n4: log 8360 → 8360 bytes (8360 fsynced)",
+          "at_s": 10.26908775,
+          "write_stall_s": 0.753541916
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n4",
+          "at_s": 12.343023542,
+          "write_stall_s": 0.753541916
+        }
+      ],
+      "refused_to_start": {
+        "n1": "exit status 1"
+      },
+      "checkers_agree": true,
+      "check_ms": 7,
+      "dir": "runs/campaign-nebulaos-fixed-20261026-170022/nebulaos-fixed-mixed-12-seed12-172442"
+    }
+  }
+]

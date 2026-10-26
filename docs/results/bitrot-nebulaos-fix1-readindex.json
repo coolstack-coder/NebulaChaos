@@ -1,0 +1,500 @@
+[
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 1,
+      "start_unix_ms": 0,
+      "duration_s": 26.046747042,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k1: stale read"
+      ],
+      "ops": 6744,
+      "ok": 5440,
+      "fail": 1251,
+      "info": 53,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000106459,
+          "write_stall_s": 1.008236166
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000423834,
+          "write_stall_s": 0.823676375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.002655625,
+          "write_stall_s": 0.821444584
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 955/1048 of raft.log (byte 81252), restart",
+          "at_s": 8.100184417,
+          "write_stall_s": 0.723915792
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 542,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed1-154431"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 2,
+      "start_unix_ms": 0,
+      "duration_s": 26.048081417,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k2: stale read",
+        "k3: stale read"
+      ],
+      "ops": 6642,
+      "ok": 5340,
+      "fail": 1247,
+      "info": 55,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000033375,
+          "write_stall_s": 1.009729541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000111958,
+          "write_stall_s": 1.009729541
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.0038445,
+          "write_stall_s": 1.006042333
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 701/1110 of raft.log (byte 59415), restart",
+          "at_s": 8.100653333,
+          "write_stall_s": 0.9092335
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 156,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed2-154459"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 3,
+      "start_unix_ms": 0,
+      "duration_s": 26.056376458,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k0: stale read",
+        "k1: stale read",
+        "k2: stale read"
+      ],
+      "ops": 6635,
+      "ok": 5383,
+      "fail": 1196,
+      "info": 56,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000159125,
+          "write_stall_s": 1.495558375
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000091917,
+          "write_stall_s": 1.4931605
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.006455208,
+          "write_stall_s": 1.486797209
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 1050/1137 of raft.log (byte 88868), restart",
+          "at_s": 8.101019042,
+          "write_stall_s": 1.392233375
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 2389,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed3-154525"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 4,
+      "start_unix_ms": 0,
+      "duration_s": 26.043416042,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k1: stale read",
+        "k3: stale read"
+      ],
+      "ops": 6745,
+      "ok": 5452,
+      "fail": 1243,
+      "info": 50,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000119958,
+          "write_stall_s": 1.044215
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000367875,
+          "write_stall_s": 1.039828917
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.004041,
+          "write_stall_s": 1.036155792
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 43/1216 of raft.log (byte 4373), restart",
+          "at_s": 8.101881,
+          "write_stall_s": 0.938315792
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 500,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed4-154555"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 5,
+      "start_unix_ms": 0,
+      "duration_s": 26.081672166,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k1: stale read",
+        "k2: stale read"
+      ],
+      "ops": 6720,
+      "ok": 5418,
+      "fail": 1247,
+      "info": 55,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000123958,
+          "write_stall_s": 1.141388333
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000505625,
+          "write_stall_s": 1.114946833
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.005952,
+          "write_stall_s": 1.109500458
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 45/1041 of raft.log (byte 4372), restart",
+          "at_s": 8.100663875,
+          "write_stall_s": 1.014788583
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 358,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed5-154622"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 6,
+      "start_unix_ms": 0,
+      "duration_s": 26.054285583,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k0: stale read",
+        "k1: stale read",
+        "k2: stale read",
+        "k3: stale read"
+      ],
+      "ops": 6735,
+      "ok": 5424,
+      "fail": 1259,
+      "info": 52,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000072166,
+          "write_stall_s": 1.109233917
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.001659291,
+          "write_stall_s": 1.064656042
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.004836,
+          "write_stall_s": 1.061479333
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 696/1106 of raft.log (byte 58991), restart",
+          "at_s": 8.100105291,
+          "write_stall_s": 0.966210042
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 3308,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed6-154649"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 7,
+      "start_unix_ms": 0,
+      "duration_s": 26.060988375,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k1: stale read",
+        "k2: stale read"
+      ],
+      "ops": 6706,
+      "ok": 5454,
+      "fail": 1201,
+      "info": 51,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000407459,
+          "write_stall_s": 0.948723708
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000494334,
+          "write_stall_s": 0.945350791
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.007329042,
+          "write_stall_s": 0.938516083
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 391/1059 of raft.log (byte 33085), restart",
+          "at_s": 8.101233,
+          "write_stall_s": 0.844612125
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 4241,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed7-154720"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 8,
+      "start_unix_ms": 0,
+      "duration_s": 26.062351167,
+      "valid": true,
+      "unknown": false,
+      "ops": 4126,
+      "ok": 3398,
+      "fail": 608,
+      "info": 120,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000543209,
+          "write_stall_s": 0.996666292
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.000080125,
+          "write_stall_s": 7.747150792
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.002572292,
+          "write_stall_s": 7.744658625
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 304/983 of raft.log (byte 26021), restart",
+          "at_s": 8.1005835,
+          "write_stall_s": 7.646647417
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 20,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed8-154752"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 9,
+      "start_unix_ms": 0,
+      "duration_s": 26.073818791,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k0: stale read",
+        "k3: stale read"
+      ],
+      "ops": 6649,
+      "ok": 5356,
+      "fail": 1241,
+      "info": 52,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000085583,
+          "write_stall_s": 1.01462775
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.00007225,
+          "write_stall_s": 0.99144775
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.0031525,
+          "write_stall_s": 0.9883675
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 504/932 of raft.log (byte 42774), restart",
+          "at_s": 8.10076075,
+          "write_stall_s": 0.89075925
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 91,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed9-154818"
+    }
+  },
+  {
+    "profile": "bitrot-quorum",
+    "summary": {
+      "name": "bitrot-quorum",
+      "target": "nebulaos-fix1-readindex",
+      "seed": 10,
+      "start_unix_ms": 0,
+      "duration_s": 26.049369042,
+      "valid": false,
+      "unknown": false,
+      "anomalies": [
+        "k1: stale read",
+        "k2: stale read"
+      ],
+      "ops": 6893,
+      "ok": 5508,
+      "fail": 1332,
+      "info": 53,
+      "faults": 6,
+      "stalls": [
+        {
+          "fault": "partition",
+          "detail": "[n1 n2 n3] | [n4 n5]",
+          "at_s": 2.000035917,
+          "write_stall_s": 1.011714291
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n1",
+          "at_s": 8.001403083,
+          "write_stall_s": 0.679055
+        },
+        {
+          "fault": "kill",
+          "detail": "SIGKILL n3",
+          "at_s": 8.006960833,
+          "write_stall_s": 0.67349725
+        },
+        {
+          "fault": "flip-log",
+          "detail": "crash n2, flipped a bit in record 892/987 of raft.log (byte 75682), restart",
+          "at_s": 8.10040675,
+          "write_stall_s": 0.580051333
+        }
+      ],
+      "checkers_agree": true,
+      "check_ms": 78,
+      "dir": "runs/campaign-nebulaos-fix1-readindex-20261026-154431/nebulaos-fix1-readindex-bitrot-quorum-seed10-154845"
+    }
+  }
+]
