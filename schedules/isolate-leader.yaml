@@ -1,0 +1,8 @@
+name: isolate-leader
+description: >
+  Cut the Raft leader and one follower off from the other three, twice.
+  The majority elects a new leader; the old one keeps answering reads.
+duration: 20s
+events:
+  - {at: 3s, do: partition, target: isolate-leader, for: 4s}
+  - {at: 10s, do: partition, target: isolate-leader, for: 4s}

@@ -232,6 +232,66 @@ func Explain(min []history.Op) (string, []string) {
 			}
 		}
 	}
+	// Two observations, one strictly after the other, of different values,
+	// when every write of either value had finished before the first one
+	// began and nothing else wrote in between: the register held a single
+	// value the whole time, so one of the two observers was served stale
+	// data.
+	for _, a := range min {
+		va, ok := observed(a)
+		if !ok {
+			continue
+		}
+		for _, b := range min {
+			vb, ok := observed(b)
+			if !ok || va == vb || a.Complete >= b.Invoke {
+				continue
+			}
+			settled := true
+			for _, x := range append(writers(va), writers(vb)...) {
+				if x.Status == history.Info || x.Complete >= a.Invoke {
+					settled = false
+				}
+			}
+			for _, x := range min {
+				if x.Mutates() && x.Value != va && x.Value != vb && x.ID != b.ID &&
+					x.Invoke < b.Complete && (x.Status == history.Info || x.Complete > a.Invoke) {
+					settled = false
+				}
+			}
+			if settled && len(writers(va)) > 0 && len(writers(vb)) > 0 {
+				return "stale read", append(lines, fmt.Sprintf(
+					"Both writes had finished before %s started, so the register held one final value. Yet %s saw %q and then %s, which began later, saw %q. One of the two was served a stale value.",
+					a.String(), describe(a), va, describe(b), vb))
+			}
+		}
+	}
+	// A value was observed, and a compare-and-set from exactly that value,
+	// issued afterwards with nothing else written in between, was refused:
+	// the observer was shown a value the register did not hold.
+	for _, a := range min {
+		va, ok := observed(a)
+		if !ok {
+			continue
+		}
+		for _, b := range min {
+			if b.Kind != history.CAS || b.Status != history.Fail || b.Expect != va || a.Complete >= b.Invoke {
+				continue
+			}
+			quiet := true
+			for _, x := range min {
+				if x.Mutates() && x.Value != va && x.ID != b.ID && x.Invoke < b.Complete &&
+					(x.Status == history.Info || x.Complete > a.Invoke) {
+					quiet = false
+				}
+			}
+			if quiet {
+				return "inconsistent read", append(lines, fmt.Sprintf(
+					"%s saw %q, but %s, issued after it with no other write in between, was refused because the value was not %q. The read was shown a value the cluster did not actually hold.",
+					describe(a), va, b.String(), va))
+			}
+		}
+	}
 	// Two successful CAS from the same expected value: both cannot have
 	// seen it.
 	for i, a := range min {

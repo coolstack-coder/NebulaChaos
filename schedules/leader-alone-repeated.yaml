@@ -1,0 +1,13 @@
+name: leader-alone-repeated
+description: >
+  Isolate the current leader completely, six times. Each time the other four
+  elect a new leader while the old one has not yet noticed it lost its
+  quorum: a short window with two nodes that both believe they lead.
+duration: 34s
+events:
+  - {at: 2s,  do: partition, target: leader-alone, for: 3s}
+  - {at: 7s,  do: partition, target: leader-alone, for: 3s}
+  - {at: 12s, do: partition, target: leader-alone, for: 3s}
+  - {at: 17s, do: partition, target: leader-alone, for: 3s}
+  - {at: 22s, do: partition, target: leader-alone, for: 3s}
+  - {at: 27s, do: partition, target: leader-alone, for: 3s}
